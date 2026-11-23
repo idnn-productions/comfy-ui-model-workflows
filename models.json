@@ -1,0 +1,92 @@
+{
+ "_note": "Model files per workflow, same format as comfy-ui-video-workflows/models.json. folder = ComfyUI models/ subfolder (UltraShape: the install's own models folder, not the shared one). bytes = size of the file we downloaded on 2026-11-23, equal to the size the server reported; no SHA-256 yet.",
+ "models": {
+  "pixal3d_multiview_int8_convrot.safetensors": {
+   "folder": "diffusion_models",
+   "gb": 5.58,
+   "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/diffusion_models/pixal3d_multiview_int8_convrot.safetensors",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape"
+   ],
+   "bytes": 5584555824
+  },
+  "pixal3d_int8_convrot.safetensors": {
+   "folder": "diffusion_models",
+   "gb": 5.58,
+   "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/diffusion_models/pixal3d_int8_convrot.safetensors",
+   "workflows": [
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 5584555824
+  },
+  "trellis_2_int8_convrot.safetensors": {
+   "folder": "diffusion_models",
+   "gb": 5.25,
+   "url": "https://huggingface.co/Comfy-Org/TRELLIS.2/resolve/main/diffusion_models/trellis_2_int8_convrot.safetensors",
+   "workflows": [
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 5253048192
+  },
+  "trellis_2_shape_vae_bf16.safetensors": {
+   "folder": "vae",
+   "gb": 1.1,
+   "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/vae/trellis_2_shape_vae_bf16.safetensors",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape",
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 1095844024
+  },
+  "trellis_2_texture_vae_bf16.safetensors": {
+   "folder": "vae",
+   "gb": 0.95,
+   "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/vae/trellis_2_texture_vae_bf16.safetensors",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape",
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 948461364
+  },
+  "dino_v3_L_naf_fp32.safetensors": {
+   "folder": "clip_vision",
+   "gb": 1.22,
+   "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/clip_vision/dino_v3_L_naf_fp32.safetensors",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape",
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 1215214176
+  },
+  "birefnet.safetensors": {
+   "folder": "background_removal",
+   "gb": 0.44,
+   "url": "https://huggingface.co/Comfy-Org/BiRefNet/resolve/main/background_removal/birefnet.safetensors",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape",
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 444473596
+  },
+  "moge_2_vitl_normal_fp16.safetensors": {
+   "folder": "geometry_estimation",
+   "gb": 0.66,
+   "url": "https://huggingface.co/Comfy-Org/MoGe/resolve/main/geometry_estimation/moge_2_vitl_normal_fp16.safetensors",
+   "workflows": [
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 661859924
+  },
+  "ultrashape_v1.pt": {
+   "folder": "UltraShape",
+   "gb": 7.37,
+   "url": "https://huggingface.co/infinith/UltraShape/resolve/main/ultrashape_v1.pt",
+   "license": "Tencent Hunyuan 3D 2.1 Community License (excludes EU, UK, South Korea)",
+   "workflows": [
+    "asset3d-pixal3d-multiview-ultrashape",
+    "asset3d-single-ultrashape"
+   ],
+   "bytes": 7366231254
+  }
+ }
+}

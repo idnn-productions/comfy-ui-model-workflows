@@ -1,0 +1,7780 @@
+{
+ "id": "aa77013b-18f1-4679-9678-6d455d3536c5",
+ "revision": 0,
+ "last_node_id": 432,
+ "last_link_id": 1566,
+ "nodes": [
+  {
+   "id": 91,
+   "type": "Trellis2ShapeStage",
+   "pos": [
+    -570,
+    1470
+   ],
+   "size": [
+    270,
+    100
+   ],
+   "flags": {},
+   "order": 57,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 1307
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 1308
+    },
+    {
+     "name": "voxel",
+     "type": "VOXEL",
+     "link": 636
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      539,
+      564
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      540,
+      565
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      541
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Trellis2ShapeStage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 207,
+   "type": "PreviewImage",
+   "pos": [
+    2710,
+    1400
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 88,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 940
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1271,
+      1540,
+      1551
+     ]
+    }
+   ],
+   "title": "Metallic",
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 208,
+   "type": "PreviewImage",
+   "pos": [
+    2990,
+    1400
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 89,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 941
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1272,
+      1541,
+      1552
+     ]
+    }
+   ],
+   "title": "Roughness",
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 164,
+   "type": "PreviewImage",
+   "pos": [
+    2430,
+    1400
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 87,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 923
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1270,
+      1534
+     ]
+    }
+   ],
+   "title": "Base Color",
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 118,
+   "type": "VAELoader",
+   "pos": [
+    -1530,
+    960
+   ],
+   "size": [
+    470,
+    90
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      632
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "trellis_2_texture_vae_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/vae/trellis_2_texture_vae_bf16.safetensors",
+      "directory": "vae"
+     }
+    ]
+   },
+   "widgets_values": [
+    "trellis_2_texture_vae_bf16.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "trellis_2_texture_vae_bf16.safetensors"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 93,
+   "type": "VaeDecodeTextureTrellis",
+   "pos": [
+    1230,
+    1330
+   ],
+   "size": [
+    230,
+    100
+   ],
+   "flags": {},
+   "order": 72,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 556
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 632
+    },
+    {
+     "name": "shape_subdivides",
+     "type": "SHAPE_SUBDIVIDES",
+     "link": 558
+    }
+   ],
+   "outputs": [
+    {
+     "name": "voxel_colors",
+     "type": "VOXEL",
+     "links": [
+      725,
+      1110
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VaeDecodeTextureTrellis",
+    "cnr_id": "comfy-core",
+    "ver": "0.21.1"
+   }
+  },
+  {
+   "id": 15,
+   "type": "CLIPVisionLoader",
+   "pos": [
+    -1530,
+    1090
+   ],
+   "size": [
+    470,
+    90
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP_VISION",
+     "type": "CLIP_VISION",
+     "links": [
+      1304,
+      1481
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPVisionLoader",
+    "cnr_id": "comfy-core",
+    "ver": "0.21.1",
+    "models": [
+     {
+      "name": "dino_v3_L_naf_fp32.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/clip_vision/dino_v3_L_naf_fp32.safetensors",
+      "directory": "clip_vision"
+     }
+    ]
+   },
+   "widgets_values": [
+    "dino_v3_L_naf_fp32.safetensors"
+   ],
+   "widgets_values_named": {
+    "clip_name": "dino_v3_L_naf_fp32.safetensors"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 202,
+   "type": "GetMeshInfo",
+   "pos": [
+    1580,
+    370
+   ],
+   "size": [
+    250,
+    150
+   ],
+   "flags": {},
+   "order": 71,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 906
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1070
+     ]
+    },
+    {
+     "name": "info",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "GetMeshInfo",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 261,
+   "type": "RenderUVAtlas",
+   "pos": [
+    2160,
+    1060
+   ],
+   "size": [
+    230,
+    90
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 85,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1132
+    }
+   ],
+   "outputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      1133
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RenderUVAtlas",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1024
+   ],
+   "widgets_values_named": {
+    "resolution": 1024
+   }
+  },
+  {
+   "id": 262,
+   "type": "PreviewImage",
+   "pos": [
+    2440,
+    1060
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 92,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1133
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 12,
+   "type": "KSampler",
+   "pos": [
+    900,
+    1330
+   ],
+   "size": [
+    290,
+    300
+   ],
+   "flags": {},
+   "order": 70,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1303
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 585
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 586
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 587
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      556
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler (1024)",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    43,
+    "fixed",
+    12,
+    1,
+    "euler",
+    "normal",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 43,
+    "control_after_generate": "fixed",
+    "steps": 12,
+    "cfg": 1,
+    "sampler_name": "euler",
+    "scheduler": "normal",
+    "denoise": 1
+   },
+   "title": "in_seed_texture"
+  },
+  {
+   "id": 210,
+   "type": "ApplyTextureToMesh",
+   "pos": [
+    3380,
+    1060
+   ],
+   "size": [
+    250,
+    170
+   ],
+   "flags": {},
+   "order": 94,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 935
+    },
+    {
+     "name": "base_color",
+     "type": "IMAGE",
+     "link": 1270
+    },
+    {
+     "name": "metallic",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1271
+    },
+    {
+     "name": "roughness",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1272
+    },
+    {
+     "name": "occlusion",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1268
+    },
+    {
+     "name": "normal_map",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1269
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1528,
+      1555
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ApplyTextureToMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 147,
+   "type": "BakeTextureFromVoxel",
+   "pos": [
+    2160,
+    1190
+   ],
+   "size": [
+    230,
+    130
+   ],
+   "flags": {},
+   "order": 82,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 900
+    },
+    {
+     "name": "voxel_colors",
+     "type": "VOXEL",
+     "link": 725
+    },
+    {
+     "name": "reference_mesh",
+     "shape": 7,
+     "type": "MESH",
+     "link": 1489
+    },
+    {
+     "name": "texture_size",
+     "type": "INT",
+     "widget": {
+      "name": "texture_size"
+     },
+     "link": 1186
+    }
+   ],
+   "outputs": [
+    {
+     "name": "base_color",
+     "type": "IMAGE",
+     "links": [
+      923
+     ]
+    },
+    {
+     "name": "metallic",
+     "type": "IMAGE",
+     "links": [
+      940
+     ]
+    },
+    {
+     "name": "roughness",
+     "type": "IMAGE",
+     "links": [
+      941
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BakeTextureFromVoxel",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    2048
+   ],
+   "widgets_values_named": {
+    "texture_size": 2048
+   }
+  },
+  {
+   "id": 288,
+   "type": "PrimitiveInt",
+   "pos": [
+    1550,
+    1070
+   ],
+   "size": [
+    240,
+    90
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "INT",
+     "type": "INT",
+     "links": [
+      1185,
+      1186,
+      1531,
+      1532,
+      1548
+     ]
+    }
+   ],
+   "title": "in_texture_resolution",
+   "properties": {
+    "Node name for S&R": "PrimitiveInt",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    4096,
+    "fixed"
+   ],
+   "widgets_values_named": {
+    "value": 4096,
+    "fixed": "fixed"
+   }
+  },
+  {
+   "id": 238,
+   "type": "MeshSmoothNormals",
+   "pos": [
+    2720,
+    370
+   ],
+   "size": [
+    270,
+    90
+   ],
+   "flags": {},
+   "order": 79,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1060
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1061,
+      1199
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshSmoothNormals",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    180
+   ],
+   "widgets_values_named": {
+    "crease_angle": 180
+   }
+  },
+  {
+   "id": 18,
+   "type": "KSampler",
+   "pos": [
+    -230,
+    1330
+   ],
+   "size": [
+    310,
+    290
+   ],
+   "flags": {},
+   "order": 59,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 966
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 539
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 540
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 541
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      566
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler (512)",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    42,
+    "fixed",
+    20,
+    7.5,
+    "euler",
+    "normal",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 42,
+    "control_after_generate": "fixed",
+    "steps": 20,
+    "cfg": 7.5,
+    "sampler_name": "euler",
+    "scheduler": "normal",
+    "denoise": 1
+   },
+   "title": "in_seed_shape"
+  },
+  {
+   "id": 252,
+   "type": "PaintMesh",
+   "pos": [
+    3110,
+    360
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {},
+   "order": 81,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1199
+    },
+    {
+     "name": "voxel_colors",
+     "type": "VOXEL",
+     "link": 1110
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1174
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PaintMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 279,
+   "type": "CFGOverride",
+   "pos": [
+    -870,
+    1330
+   ],
+   "size": [
+    270,
+    150
+   ],
+   "flags": {},
+   "order": 24,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1302
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1164
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CFGOverride",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1,
+    0.769,
+    1
+   ],
+   "widgets_values_named": {
+    "cfg": 1,
+    "start_percent": 0.769,
+    "end_percent": 1
+   }
+  },
+  {
+   "id": 126,
+   "type": "RescaleCFG",
+   "pos": [
+    -570,
+    1330
+   ],
+   "size": [
+    270,
+    90
+   ],
+   "flags": {},
+   "order": 32,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1164
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      966,
+      1108
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RescaleCFG",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0.5
+   ],
+   "widgets_values_named": {
+    "multiplier": 0.5
+   }
+  },
+  {
+   "id": 192,
+   "type": "RemoveBackground",
+   "pos": [
+    -2580,
+    370
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 22,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 887
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1443
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1445
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 246,
+   "type": "Preview3DAdvanced",
+   "pos": [
+    630,
+    650
+   ],
+   "size": [
+    400,
+    550
+   ],
+   "flags": {},
+   "order": 63,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+     "link": 1097
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D",
+     "links": null
+    },
+    {
+     "name": "model_3d_info",
+     "type": "LOAD3D_MODEL_INFO",
+     "links": null
+    },
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": null
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "links": null
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Preview3DAdvanced",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "Camera Config": {
+     "cameraType": "perspective",
+     "fov": 35,
+     "state": {
+      "position": {
+       "x": 4.560700935254221,
+       "y": 0.7915848594219332,
+       "z": 2.5543448034957765
+      },
+      "target": {
+       "x": -0.18539216968998096,
+       "y": -0.12940291071409174,
+       "z": 0.060075853302763965
+      },
+      "zoom": 1,
+      "cameraType": "perspective",
+      "quaternion": {
+       "x": -0.07271474945847924,
+       "y": 0.5152332585253664,
+       "z": 0.04393032519103963,
+       "w": 0.8528290456176625
+      },
+      "fov": 35,
+      "aspect": 1,
+      "near": 0.01,
+      "far": 10000,
+      "frustum": {
+       "left": -5,
+       "right": 5,
+       "top": 5,
+       "bottom": -5
+      }
+     },
+     "hasCustomUp": true,
+     "useCustomUp": true
+    },
+    "Last Time Model File": "preview3d_advanced_9f2c05c8a86c42b7b8738773ad333d38.glb [temp]",
+    "Scene Config": {
+     "showGrid": true,
+     "backgroundColor": "#282828",
+     "backgroundImage": "",
+     "backgroundRenderMode": "tiled",
+     "models": []
+    },
+    "Light Config": {
+     "intensity": 3,
+     "hdri": {
+      "enabled": false,
+      "hdriPath": "",
+      "showAsBackground": false,
+      "intensity": 1
+     }
+    },
+    "Model Config": {
+     "upDirection": "original",
+     "materialMode": "original",
+     "showSkeleton": false,
+     "gizmo": {
+      "enabled": false,
+      "mode": "translate",
+      "position": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "rotation": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "scale": {
+       "x": 1,
+       "y": 1,
+       "z": 1
+      }
+     }
+    }
+   },
+   "widgets_values": [
+    "",
+    1024,
+    1024
+   ],
+   "widgets_values_named": {
+    "viewport_state": "",
+    "width": 1024,
+    "height": 1024
+   }
+  },
+  {
+   "id": 119,
+   "type": "VaeDecodeStructureTrellis2",
+   "pos": [
+    20,
+    650
+   ],
+   "size": [
+    260,
+    110
+   ],
+   "flags": {},
+   "order": 54,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 633
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 1253
+    }
+   ],
+   "outputs": [
+    {
+     "name": "voxel",
+     "type": "VOXEL",
+     "links": [
+      635,
+      636
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VaeDecodeStructureTrellis2",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    "32"
+   ],
+   "widgets_values_named": {
+    "resolution": "32"
+   }
+  },
+  {
+   "id": 4,
+   "type": "VoxelToMesh",
+   "pos": [
+    320,
+    650
+   ],
+   "size": [
+    260,
+    120
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 56,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "voxel",
+     "type": "VOXEL",
+     "link": 635
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MESH",
+     "type": "MESH",
+     "links": [
+      1096
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VoxelToMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    "basic",
+    0.6
+   ],
+   "widgets_values_named": {
+    "algorithm": "basic",
+    "threshold": 0.6
+   }
+  },
+  {
+   "id": 247,
+   "type": "MeshToFile3D",
+   "pos": [
+    340,
+    830
+   ],
+   "size": [
+    230,
+    60
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 60,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1096
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB",
+     "links": [
+      1097
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshToFile3D",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 3,
+   "type": "KSampler",
+   "pos": [
+    -310,
+    820
+   ],
+   "size": [
+    250,
+    290
+   ],
+   "flags": {},
+   "order": 52,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 962
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 1305
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 1306
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 509
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      633
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    56,
+    "fixed",
+    12,
+    7.5,
+    "euler",
+    "normal",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 56,
+    "control_after_generate": "fixed",
+    "steps": 12,
+    "cfg": 7.5,
+    "sampler_name": "euler",
+    "scheduler": "normal",
+    "denoise": 1
+   },
+   "title": "in_seed_structure"
+  },
+  {
+   "id": 125,
+   "type": "RescaleCFG",
+   "pos": [
+    -590,
+    650
+   ],
+   "size": [
+    250,
+    90
+   ],
+   "flags": {},
+   "order": 31,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 904
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      976
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RescaleCFG",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0.7
+   ],
+   "widgets_values_named": {
+    "multiplier": 0.7
+   }
+  },
+  {
+   "id": 199,
+   "type": "CFGOverride",
+   "pos": [
+    -870,
+    650
+   ],
+   "size": [
+    260,
+    150
+   ],
+   "flags": {},
+   "order": 23,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1301
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      904
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CFGOverride",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1,
+    0.667,
+    1
+   ],
+   "widgets_values_named": {
+    "cfg": 1,
+    "start_percent": 0.667,
+    "end_percent": 1
+   }
+  },
+  {
+   "id": 108,
+   "type": "ModelSamplingSD3",
+   "pos": [
+    -300,
+    650
+   ],
+   "size": [
+    250,
+    90
+   ],
+   "flags": {},
+   "order": 36,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 976
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      962
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ModelSamplingSD3",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    5
+   ],
+   "widgets_values_named": {
+    "shift": 5
+   }
+  },
+  {
+   "id": 250,
+   "type": "Note",
+   "pos": [
+    -860,
+    850
+   ],
+   "size": [
+    250,
+    130
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "Note: CFG",
+   "properties": {},
+   "widgets_values": [
+    "CFG override and rescaleCFG are to match the original default pipeline behaviour"
+   ],
+   "widgets_values_named": {
+    "text": "CFG override and rescaleCFG are to match the original default pipeline behaviour"
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 94,
+   "type": "Trellis2UpsampleStage",
+   "pos": [
+    -230,
+    1670
+   ],
+   "size": [
+    300,
+    150
+   ],
+   "flags": {},
+   "order": 62,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 564
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 565
+    },
+    {
+     "name": "shape_latent",
+     "type": "LATENT",
+     "link": 566
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 1265
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      567
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      568
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      569
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Trellis2UpsampleStage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1024
+   ],
+   "widgets_values_named": {
+    "target_resolution": 1024
+   },
+   "title": "in_shape_resolution"
+  },
+  {
+   "id": 233,
+   "type": "BakeAmbientOcclusion",
+   "pos": [
+    2430,
+    1730
+   ],
+   "size": [
+    230,
+    220
+   ],
+   "flags": {},
+   "order": 84,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "low_poly",
+     "type": "MESH",
+     "link": 1069
+    },
+    {
+     "name": "high_poly",
+     "type": "MESH",
+     "link": 1500
+    }
+   ],
+   "outputs": [
+    {
+     "name": "occlusion",
+     "type": "IMAGE",
+     "links": [
+      1044
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BakeAmbientOcclusion",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1024,
+    64,
+    0.71,
+    1,
+    0.01
+   ],
+   "widgets_values_named": {
+    "resolution": 1024,
+    "samples": 64,
+    "max_distance": 0.71,
+    "strength": 1,
+    "bias": 0.01
+   }
+  },
+  {
+   "id": 224,
+   "type": "BakeNormalMapFromMesh",
+   "pos": [
+    2430,
+    2060
+   ],
+   "size": [
+    240,
+    170
+   ],
+   "flags": {},
+   "order": 83,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "low_poly",
+     "type": "MESH",
+     "link": 1066
+    },
+    {
+     "name": "high_poly",
+     "type": "MESH",
+     "link": 1501
+    }
+   ],
+   "outputs": [
+    {
+     "name": "normal_map",
+     "type": "IMAGE",
+     "links": [
+      1017
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BakeNormalMapFromMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    2048,
+    0.05,
+    true
+   ],
+   "widgets_values_named": {
+    "resolution": 2048,
+    "cage_distance": 0.05,
+    "ignore_backfaces": true
+   }
+  },
+  {
+   "id": 226,
+   "type": "PreviewImage",
+   "pos": [
+    2700,
+    2060
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 90,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1017
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1269,
+      1543,
+      1554
+     ]
+    }
+   ],
+   "title": "Normal",
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 235,
+   "type": "PreviewImage",
+   "pos": [
+    2700,
+    1730
+   ],
+   "size": [
+    230,
+    290
+   ],
+   "flags": {},
+   "order": 91,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1044
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1268,
+      1542,
+      1553
+     ]
+    }
+   ],
+   "title": "Ambiant Occlusion",
+   "properties": {
+    "Node name for S&R": "PreviewImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 241,
+   "type": "RemeshMesh",
+   "pos": [
+    1870,
+    370
+   ],
+   "size": [
+    390,
+    274
+   ],
+   "flags": {},
+   "order": 73,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1070
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1487,
+      1490,
+      1496
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemeshMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    768,
+    "solid",
+    20,
+    false,
+    1,
+    0,
+    false,
+    20,
+    0.01,
+    20000000
+   ],
+   "widgets_values_named": {
+    "resolution": 768,
+    "sign_mode": "solid",
+    "sign_mode.fill": 20,
+    "sign_mode.qef": false,
+    "band": 1,
+    "project_back": 0,
+    "fix_poles": false,
+    "smooth_iters": 20,
+    "drop_small_components": 0.01,
+    "precluster_max_verts": 20000000
+   }
+  },
+  {
+   "id": 186,
+   "type": "DecimateMesh",
+   "pos": [
+    2290,
+    370
+   ],
+   "size": [
+    390,
+    90
+   ],
+   "flags": {},
+   "order": 78,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1499
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1060
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "DecimateMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    700000,
+    "midpoint"
+   ],
+   "widgets_values_named": {
+    "target_face_count": 700000,
+    "placement_mode": "midpoint"
+   },
+   "title": "in_target_faces"
+  },
+  {
+   "id": 196,
+   "type": "UnwrapMesh",
+   "pos": [
+    1840,
+    1060
+   ],
+   "size": [
+    260,
+    240
+   ],
+   "flags": {},
+   "order": 80,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1061
+    },
+    {
+     "name": "resolution",
+     "type": "INT",
+     "widget": {
+      "name": "resolution"
+     },
+     "link": 1185
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      900,
+      935,
+      1066,
+      1069,
+      1132,
+      1538,
+      1549
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UnwrapMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "pec",
+    2048,
+    1,
+    0.0002
+   ],
+   "widgets_values_named": {
+    "segmenter": "pec",
+    "resolution": 2048,
+    "padding": 1,
+    "weld_distance": 0.0002
+   }
+  },
+  {
+   "id": 117,
+   "type": "VAELoader",
+   "pos": [
+    -1530,
+    820
+   ],
+   "size": [
+    470,
+    90
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      1253,
+      1265,
+      1266
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "trellis_2_shape_vae_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/vae/trellis_2_shape_vae_bf16.safetensors",
+      "directory": "vae"
+     }
+    ]
+   },
+   "widgets_values": [
+    "trellis_2_shape_vae_bf16.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "trellis_2_shape_vae_bf16.safetensors"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 193,
+   "type": "LoadBackgroundRemovalModel",
+   "pos": [
+    -2870,
+    180
+   ],
+   "size": [
+    330,
+    90
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "bg_model",
+     "type": "BACKGROUND_REMOVAL",
+     "links": [
+      887,
+      1372,
+      1376,
+      1384,
+      1459,
+      1464,
+      1493
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadBackgroundRemovalModel",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "birefnet.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/BiRefNet/resolve/main/background_removal/birefnet.safetensors",
+      "directory": "background_removal"
+     }
+    ]
+   },
+   "widgets_values": [
+    "birefnet.safetensors"
+   ],
+   "widgets_values_named": {
+    "bg_removal_name": "birefnet.safetensors"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 92,
+   "type": "VaeDecodeShapeTrellis",
+   "pos": [
+    230,
+    1700
+   ],
+   "size": [
+    270,
+    80
+   ],
+   "flags": {},
+   "order": 67,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 551
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 1266
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      906,
+      1486
+     ]
+    },
+    {
+     "name": "shape_subdivides",
+     "type": "SHAPE_SUBDIVIDES",
+     "links": [
+      558
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VaeDecodeShapeTrellis",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   }
+  },
+  {
+   "id": 98,
+   "type": "Trellis2TextureStage",
+   "pos": [
+    630,
+    1330
+   ],
+   "size": [
+    230,
+    100
+   ],
+   "flags": {},
+   "order": 68,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 1484
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 1485
+    },
+    {
+     "name": "shape_latent",
+     "type": "LATENT",
+     "link": 584
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      585
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      586
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      587
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Trellis2TextureStage",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 282,
+   "type": "MeshToFile3D",
+   "pos": [
+    3110,
+    490
+   ],
+   "size": [
+    230,
+    60
+   ],
+   "flags": {},
+   "order": 86,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1174
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB",
+     "links": [
+      1296
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshToFile3D",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 260,
+   "type": "MeshSmoothNormals",
+   "pos": [
+    3660,
+    1060
+   ],
+   "size": [
+    270,
+    90
+   ],
+   "flags": {},
+   "order": 104,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1558
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1176,
+      1559,
+      1561
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshSmoothNormals",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    180
+   ],
+   "widgets_values_named": {
+    "crease_angle": 180
+   }
+  },
+  {
+   "id": 285,
+   "type": "MeshToFile3D",
+   "pos": [
+    3700,
+    1200
+   ],
+   "size": [
+    230,
+    60
+   ],
+   "flags": {},
+   "order": 105,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1176
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB",
+     "links": [
+      1442
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshToFile3D",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 87,
+   "type": "EmptyTrellis2LatentStructure",
+   "pos": [
+    -590,
+    880
+   ],
+   "size": [
+    250,
+    90
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      509
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "EmptyTrellis2LatentStructure",
+    "cnr_id": "comfy-core",
+    "ver": "0.21.1"
+   },
+   "widgets_values": [
+    1
+   ],
+   "widgets_values_named": {
+    "batch_size": 1
+   }
+  },
+  {
+   "id": 23,
+   "type": "KSampler",
+   "pos": [
+    220,
+    1330
+   ],
+   "size": [
+    290,
+    290
+   ],
+   "flags": {},
+   "order": 65,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1108
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 567
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 568
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 569
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      551,
+      584
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler (1024)",
+    "cnr_id": "comfy-core",
+    "ver": "0.17.0"
+   },
+   "widgets_values": [
+    42,
+    "fixed",
+    12,
+    7.5,
+    "euler",
+    "simple",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 42,
+    "control_after_generate": "fixed",
+    "steps": 12,
+    "cfg": 7.5,
+    "sampler_name": "euler",
+    "scheduler": "simple",
+    "denoise": 1
+   },
+   "title": "in_seed_shape_hires"
+  },
+  {
+   "id": 319,
+   "type": "UNETLoader",
+   "pos": [
+    -1530,
+    660
+   ],
+   "size": [
+    470,
+    110
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1301,
+      1302,
+      1303
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "pixal3d_multiview_int8_convrot.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Pixal3D/resolve/main/diffusion_models/pixal3d_multiview_int8_convrot.safetensors",
+      "directory": "diffusion_models"
+     }
+    ]
+   },
+   "widgets_values": [
+    "pixal3d_multiview_int8_convrot.safetensors",
+    "default"
+   ],
+   "widgets_values_named": {
+    "unet_name": "pixal3d_multiview_int8_convrot.safetensors",
+    "weight_dtype": "default"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 323,
+   "type": "Preview3DAdvanced",
+   "pos": [
+    3380,
+    260
+   ],
+   "size": [
+    520,
+    660
+   ],
+   "flags": {},
+   "order": 93,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+     "link": 1296
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D",
+     "links": null
+    },
+    {
+     "name": "model_3d_info",
+     "type": "LOAD3D_MODEL_INFO",
+     "links": null
+    },
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": null
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "links": null
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Preview3DAdvanced",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "Camera Config": {
+     "cameraType": "perspective",
+     "fov": 35,
+     "state": {
+      "position": {
+       "x": -0.6367669825458393,
+       "y": 0.4813877766578226,
+       "z": 2.333614742089836
+      },
+      "target": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "zoom": 1,
+      "cameraType": "perspective",
+      "quaternion": {
+       "x": -0.09719459146281581,
+       "y": -0.13215764572775018,
+       "z": -0.01302255730361706,
+       "w": 0.9863660482130094
+      },
+      "fov": 35,
+      "aspect": 1,
+      "near": 0.01,
+      "far": 10000,
+      "frustum": {
+       "left": -5,
+       "right": 5,
+       "top": 5,
+       "bottom": -5
+      }
+     }
+    },
+    "Last Time Model File": "preview3d_advanced_5615dfcb3a7244d6992cd7cc89328a37.glb [temp]",
+    "Light Config": {
+     "intensity": 1.5360000000000005,
+     "hdri": {
+      "enabled": false,
+      "hdriPath": "",
+      "showAsBackground": false,
+      "intensity": 1
+     }
+    },
+    "Scene Config": {
+     "showGrid": true,
+     "backgroundColor": "#282828",
+     "backgroundImage": "",
+     "backgroundRenderMode": "tiled",
+     "models": []
+    },
+    "Model Config": {
+     "upDirection": "original",
+     "materialMode": "original",
+     "showSkeleton": false,
+     "gizmo": {
+      "enabled": false,
+      "mode": "translate",
+      "position": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "rotation": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "scale": {
+       "x": 1,
+       "y": 1,
+       "z": 1
+      }
+     }
+    }
+   },
+   "widgets_values": [
+    "",
+    1024,
+    1024
+   ],
+   "widgets_values_named": {
+    "viewport_state": "",
+    "width": 1024,
+    "height": 1024
+   }
+  },
+  {
+   "id": 324,
+   "type": "Pixal3DMultiViewConditioning",
+   "pos": [
+    -1410,
+    1340
+   ],
+   "size": [
+    310,
+    170
+   ],
+   "flags": {},
+   "order": 50,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip_vision_model",
+     "type": "CLIP_VISION",
+     "link": 1304
+    },
+    {
+     "name": "front",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1470
+    },
+    {
+     "name": "left",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1473
+    },
+    {
+     "name": "back",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1476
+    },
+    {
+     "name": "right",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1479
+    },
+    {
+     "name": "fov",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov"
+     },
+     "link": 1482
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      1305,
+      1307
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      1306,
+      1308
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Pixal3DMultiViewConditioning"
+   },
+   "widgets_values": [
+    20
+   ],
+   "widgets_values_named": {
+    "fov": 20
+   },
+   "title": "Shape conditioning"
+  },
+  {
+   "id": 340,
+   "type": "SaveImageAdvanced",
+   "pos": [
+    -2010,
+    370
+   ],
+   "size": [
+    270,
+    130
+   ],
+   "flags": {},
+   "order": 37,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1446
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1469,
+      1471,
+      1492,
+      1494,
+      1502
+     ]
+    }
+   ],
+   "properties": {},
+   "widgets_values": [
+    "front_view",
+    "png",
+    "8-bit",
+    "sRGB"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "front_view",
+    "format": "png",
+    "format.bit_depth": "8-bit",
+    "format.input_color_space": "sRGB"
+   }
+  },
+  {
+   "id": 343,
+   "type": "SaveImageAdvanced",
+   "pos": [
+    -2010,
+    1240
+   ],
+   "size": [
+    270,
+    130
+   ],
+   "flags": {},
+   "order": 38,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1454
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1475,
+      1477,
+      1505
+     ]
+    }
+   ],
+   "properties": {},
+   "widgets_values": [
+    "back_view",
+    "png",
+    "8-bit",
+    "sRGB"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "back_view",
+    "format": "png",
+    "format.bit_depth": "8-bit",
+    "format.input_color_space": "sRGB"
+   }
+  },
+  {
+   "id": 344,
+   "type": "SaveImageAdvanced",
+   "pos": [
+    -2010,
+    800
+   ],
+   "size": [
+    270,
+    130
+   ],
+   "flags": {},
+   "order": 39,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1450
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1472,
+      1474,
+      1503,
+      1536
+     ]
+    }
+   ],
+   "properties": {},
+   "widgets_values": [
+    "left_view",
+    "png",
+    "8-bit",
+    "sRGB"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "left_view",
+    "format": "png",
+    "format.bit_depth": "8-bit",
+    "format.input_color_space": "sRGB"
+   }
+  },
+  {
+   "id": 346,
+   "type": "SaveImageAdvanced",
+   "pos": [
+    -2010,
+    1680
+   ],
+   "size": [
+    270,
+    130
+   ],
+   "flags": {},
+   "order": 40,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1458
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      1478,
+      1480,
+      1507
+     ]
+    }
+   ],
+   "properties": {},
+   "widgets_values": [
+    "right_view",
+    "png",
+    "8-bit",
+    "sRGB"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "right_view",
+    "format": "png",
+    "format.bit_depth": "8-bit",
+    "format.input_color_space": "sRGB"
+   }
+  },
+  {
+   "id": 348,
+   "type": "RemoveBackground",
+   "pos": [
+    -2600,
+    800
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 25,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1372
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1447
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1449
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 351,
+   "type": "RemoveBackground",
+   "pos": [
+    -2600,
+    1240
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 26,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1376
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1451
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1453
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 353,
+   "type": "RemoveBackground",
+   "pos": [
+    -2600,
+    1680
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {
+    "collapsed": false
+   },
+   "order": 27,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1384
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1455
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1457
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 372,
+   "type": "Save3DAdvanced",
+   "pos": [
+    3990,
+    1030
+   ],
+   "size": [
+    970,
+    1260
+   ],
+   "flags": {},
+   "order": 107,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+     "link": 1442
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D",
+     "links": null
+    },
+    {
+     "name": "model_3d_info",
+     "type": "LOAD3D_MODEL_INFO",
+     "links": null
+    },
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": null
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "links": null
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Camera Config": {
+     "cameraType": "perspective",
+     "fov": 35,
+     "state": {
+      "position": {
+       "x": 10,
+       "y": 10,
+       "z": 10.000000000000002
+      },
+      "target": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "zoom": 1,
+      "cameraType": "perspective",
+      "quaternion": {
+       "x": -0.2798481423331213,
+       "y": 0.3647051996310008,
+       "z": 0.11591689595929511,
+       "w": 0.8804762392171493
+      },
+      "fov": 35,
+      "aspect": 1,
+      "near": 0.01,
+      "far": 10000,
+      "frustum": {
+       "left": -5,
+       "right": 5,
+       "top": 5,
+       "bottom": -5
+      }
+     }
+    },
+    "Last Time Model File": "3d/ComfyUI_00004.glb",
+    "Light Config": {
+     "intensity": 3,
+     "hdri": {
+      "enabled": false,
+      "hdriPath": "",
+      "showAsBackground": false,
+      "intensity": 1
+     }
+    },
+    "Scene Config": {
+     "showGrid": true,
+     "backgroundColor": "#282828",
+     "backgroundImage": "",
+     "backgroundRenderMode": "tiled",
+     "models": []
+    },
+    "Model Config": {
+     "upDirection": "original",
+     "materialMode": "original",
+     "showSkeleton": false,
+     "gizmo": {
+      "enabled": false,
+      "mode": "translate",
+      "position": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "rotation": {
+       "x": 0,
+       "y": 0,
+       "z": 0
+      },
+      "scale": {
+       "x": 1,
+       "y": 1,
+       "z": 1
+      }
+     }
+    }
+   },
+   "widgets_values": [
+    "3d/asset3d-pixal3d-mv",
+    "",
+    1024,
+    1024
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "3d/asset3d-pixal3d-mv",
+    "viewport_state": "",
+    "width": 1024,
+    "height": 1024
+   },
+   "title": "out_model"
+  },
+  {
+   "id": 377,
+   "type": "Asset3DFrameViews",
+   "pos": [
+    -2330,
+    370
+   ],
+   "size": [
+    300,
+    460
+   ],
+   "flags": {},
+   "order": 33,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "front_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1444
+    },
+    {
+     "name": "left_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1448
+    },
+    {
+     "name": "back_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1452
+    },
+    {
+     "name": "right_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1456
+    },
+    {
+     "name": "front_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1445
+    },
+    {
+     "name": "left_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1449
+    },
+    {
+     "name": "back_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1453
+    },
+    {
+     "name": "right_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1457
+    },
+    {
+     "name": "top_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1461
+    },
+    {
+     "name": "bottom_image",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1466
+    },
+    {
+     "name": "top_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1462
+    },
+    {
+     "name": "bottom_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1467
+    }
+   ],
+   "outputs": [
+    {
+     "name": "front",
+     "type": "IMAGE",
+     "links": [
+      1446
+     ]
+    },
+    {
+     "name": "left",
+     "type": "IMAGE",
+     "links": [
+      1450
+     ]
+    },
+    {
+     "name": "back",
+     "type": "IMAGE",
+     "links": [
+      1454
+     ]
+    },
+    {
+     "name": "right",
+     "type": "IMAGE",
+     "links": [
+      1458
+     ]
+    },
+    {
+     "name": "top",
+     "type": "IMAGE",
+     "links": [
+      1463,
+      1509
+     ]
+    },
+    {
+     "name": "bottom",
+     "type": "IMAGE",
+     "links": [
+      1468,
+      1511
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Asset3DFrameViews"
+   },
+   "title": "in_view_framing",
+   "widgets_values": [
+    "match_height",
+    1024,
+    1.1
+   ],
+   "widgets_values_named": {
+    "mode": "match_height",
+    "size": 1024,
+    "pad_factor": 1.1
+   }
+  },
+  {
+   "id": 378,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    330
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1443,
+      1444
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_front_image",
+   "widgets_values": [
+    "front.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "front.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 379,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    760
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1447,
+      1448
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_left_image",
+   "widgets_values": [
+    "left.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "left.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 380,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    1200
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1451,
+      1452
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_back_image",
+   "widgets_values": [
+    "back.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "back.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 381,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    1640
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1455,
+      1456
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_right_image",
+   "widgets_values": [
+    "right.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "right.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 382,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    2170
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1460,
+      1461
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_top_image",
+   "widgets_values": [
+    "top.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "top.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 383,
+   "type": "RemoveBackground",
+   "pos": [
+    -2600,
+    2210
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {},
+   "order": 28,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1459
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1460
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1462
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   }
+  },
+  {
+   "id": 384,
+   "type": "SaveImage",
+   "pos": [
+    -2010,
+    2210
+   ],
+   "size": [
+    270,
+    270
+   ],
+   "flags": {},
+   "order": 41,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1463
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Framed top view",
+   "widgets_values": [
+    "top_view"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "top_view"
+   }
+  },
+  {
+   "id": 385,
+   "type": "LoadImage",
+   "pos": [
+    -3360,
+    2610
+   ],
+   "size": [
+    420,
+    400
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1465,
+      1466
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_bottom_image",
+   "widgets_values": [
+    "bottom.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "bottom.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 386,
+   "type": "RemoveBackground",
+   "pos": [
+    -2600,
+    2650
+   ],
+   "size": [
+    230,
+    80
+   ],
+   "flags": {},
+   "order": 29,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1464
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1465
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1467
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   }
+  },
+  {
+   "id": 387,
+   "type": "SaveImage",
+   "pos": [
+    -2010,
+    2650
+   ],
+   "size": [
+    270,
+    270
+   ],
+   "flags": {},
+   "order": 42,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1468
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Framed bottom view",
+   "widgets_values": [
+    "bottom_view"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "bottom_view"
+   }
+  },
+  {
+   "id": 388,
+   "type": "Asset3DShapeImages",
+   "pos": [
+    -1630,
+    1600
+   ],
+   "size": [
+    300,
+    150
+   ],
+   "flags": {},
+   "order": 45,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "front",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1469
+    },
+    {
+     "name": "left",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1472
+    },
+    {
+     "name": "back",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1475
+    },
+    {
+     "name": "right",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1478
+    }
+   ],
+   "outputs": [
+    {
+     "name": "front",
+     "type": "IMAGE",
+     "links": [
+      1470
+     ]
+    },
+    {
+     "name": "left",
+     "type": "IMAGE",
+     "links": [
+      1473
+     ]
+    },
+    {
+     "name": "back",
+     "type": "IMAGE",
+     "links": [
+      1476
+     ]
+    },
+    {
+     "name": "right",
+     "type": "IMAGE",
+     "links": [
+      1479
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Asset3DShapeImages"
+   },
+   "title": "in_shape_image_mode",
+   "widgets_values": [
+    "original"
+   ],
+   "widgets_values_named": {
+    "mode": "original"
+   }
+  },
+  {
+   "id": 389,
+   "type": "Pixal3DMultiViewConditioning",
+   "pos": [
+    -1280,
+    1600
+   ],
+   "size": [
+    310,
+    170
+   ],
+   "flags": {},
+   "order": 46,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip_vision_model",
+     "type": "CLIP_VISION",
+     "link": 1481
+    },
+    {
+     "name": "front",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1471
+    },
+    {
+     "name": "left",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1474
+    },
+    {
+     "name": "back",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1477
+    },
+    {
+     "name": "right",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1480
+    },
+    {
+     "name": "fov",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov"
+     },
+     "link": 1483
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      1484
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      1485
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Pixal3DMultiViewConditioning",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Texture conditioning (colour views)",
+   "widgets_values": [
+    20
+   ],
+   "widgets_values_named": {
+    "fov": 20
+   }
+  },
+  {
+   "id": 390,
+   "type": "PrimitiveFloat",
+   "pos": [
+    -1630,
+    1800
+   ],
+   "size": [
+    300,
+    70
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "FLOAT",
+     "type": "FLOAT",
+     "links": [
+      1482,
+      1483,
+      1518,
+      1520,
+      1527
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PrimitiveFloat",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_fov",
+   "widgets_values": [
+    20.0
+   ],
+   "widgets_values_named": {
+    "value": 20.0
+   }
+  },
+  {
+   "id": 391,
+   "type": "DecimateMesh",
+   "pos": [
+    1540,
+    -350
+   ],
+   "size": [
+    360,
+    90
+   ],
+   "flags": {},
+   "order": 74,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1490
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1491
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "DecimateMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "UltraShape input (decimate coarse mesh)",
+   "widgets_values": [
+    500000,
+    "midpoint"
+   ],
+   "widgets_values_named": {
+    "target_face_count": 500000,
+    "placement_mode": "midpoint"
+   }
+  },
+  {
+   "id": 392,
+   "type": "RemoveBackground",
+   "pos": [
+    1540,
+    -200
+   ],
+   "size": [
+    360,
+    80
+   ],
+   "flags": {},
+   "order": 47,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 1493
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1494
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      1495
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "UltraShape image mask"
+  },
+  {
+   "id": 393,
+   "type": "Asset3DUltraShapeRefine",
+   "pos": [
+    1940,
+    -350
+   ],
+   "size": [
+    420,
+    470
+   ],
+   "flags": {},
+   "order": 76,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1491
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1492
+    },
+    {
+     "name": "mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1495
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1497
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Asset3DUltraShapeRefine"
+   },
+   "title": "in_ultrashape",
+   "widgets_values": [
+    "ultrashape_v1.pt",
+    50,
+    5.0,
+    384,
+    16384,
+    8000,
+    42,
+    "bfloat16",
+    true,
+    0.99,
+    "0",
+    "undo_normalize",
+    false,
+    0.01
+   ],
+   "widgets_values_named": {
+    "checkpoint": "ultrashape_v1.pt",
+    "steps": 50,
+    "guidance_scale": 5.0,
+    "octree_resolution": 384,
+    "num_latents": 16384,
+    "num_chunks": 8000,
+    "refine_seed": 42,
+    "dtype": "bfloat16",
+    "low_vram": true,
+    "normalize_scale": 0.99,
+    "yaw_degrees": "0",
+    "align": "undo_normalize",
+    "flip_faces": false,
+    "drop_floaters": 0.01
+   }
+  },
+  {
+   "id": 394,
+   "type": "PrimitiveBoolean",
+   "pos": [
+    2400,
+    -350
+   ],
+   "size": [
+    270,
+    70
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "BOOLEAN",
+     "type": "BOOLEAN",
+     "links": [
+      1488,
+      1498
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PrimitiveBoolean",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_use_ultrashape",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "value": true
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 395,
+   "type": "ComfySwitchNode",
+   "pos": [
+    2400,
+    -230
+   ],
+   "size": [
+    270,
+    110
+   ],
+   "flags": {},
+   "order": 77,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "on_false",
+     "type": "MESH",
+     "link": 1496
+    },
+    {
+     "name": "on_true",
+     "type": "MESH",
+     "link": 1497
+    },
+    {
+     "name": "switch",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "switch"
+     },
+     "link": 1498
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "MESH",
+     "links": [
+      1499,
+      1500,
+      1501,
+      1564
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfySwitchNode",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Switch: UltraShape",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "switch": true
+   }
+  },
+  {
+   "id": 396,
+   "type": "MarkdownNote",
+   "pos": [
+    2400,
+    -80
+   ],
+   "size": [
+    400,
+    190
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "**in_use_ultrashape** true = refine the geometry with UltraShape 1.0 before decimating and baking.\n\nfalse = stock result. The refine node is then skipped, but ComfyUI still needs the `asset3d_ultrashape` node installed to load this graph.\n\nFirst run: keep octree 384 and low_vram on. See SETUP.md before raising them."
+   ],
+   "widgets_values_named": {
+    "text": "**in_use_ultrashape** true = refine the geometry with UltraShape 1.0 before decimating and baking.\n\nfalse = stock result. The refine node is then skipped, but ComfyUI still needs the `asset3d_ultrashape` node installed to load this graph.\n\nFirst run: keep octree 384 and low_vram on. See SETUP.md before raising them."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 397,
+   "type": "ComfySwitchNode",
+   "pos": [
+    2710,
+    -230
+   ],
+   "size": [
+    270,
+    110
+   ],
+   "flags": {},
+   "order": 75,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "on_false",
+     "type": "MESH",
+     "link": 1486
+    },
+    {
+     "name": "on_true",
+     "type": "MESH",
+     "link": 1487
+    },
+    {
+     "name": "switch",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "switch"
+     },
+     "link": 1488
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "MESH",
+     "links": [
+      1489
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfySwitchNode",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Switch: bake reference surface",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "switch": true
+   }
+  },
+  {
+   "id": 398,
+   "type": "ImageBatch",
+   "pos": [
+    2980,
+    2460
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 48,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1502
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1503
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1504
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views batch (+left)"
+  },
+  {
+   "id": 399,
+   "type": "ImageBatch",
+   "pos": [
+    2980,
+    2550
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 51,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1504
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1505
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1506
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views batch (+back)"
+  },
+  {
+   "id": 400,
+   "type": "ImageBatch",
+   "pos": [
+    2980,
+    2640
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 53,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1506
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1507
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1508,
+      1512
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views batch (+right)"
+  },
+  {
+   "id": 401,
+   "type": "ImageToMask",
+   "pos": [
+    2980,
+    2740
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 64,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1515
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": [
+      1516
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageToMask",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views: subject mask",
+   "widgets_values": [
+    "red"
+   ],
+   "widgets_values_named": {
+    "channel": "red"
+   }
+  },
+  {
+   "id": 402,
+   "type": "ThresholdMask",
+   "pos": [
+    2980,
+    2840
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 66,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "link": 1516
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": [
+      1517
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ThresholdMask",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "widgets_values": [
+    0.03
+   ],
+   "widgets_values_named": {
+    "value": 0.03
+   }
+  },
+  {
+   "id": 403,
+   "type": "GrowMask",
+   "pos": [
+    2980,
+    2940
+   ],
+   "size": [
+    200,
+    90
+   ],
+   "flags": {},
+   "order": 69,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "link": 1517
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": [
+      1547
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "GrowMask",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views: trim the edge",
+   "widgets_values": [
+    -2,
+    true
+   ],
+   "widgets_values_named": {
+    "expand": -2,
+    "tapered_corners": true
+   }
+  },
+  {
+   "id": 404,
+   "type": "ImageBatch",
+   "pos": [
+    2740,
+    2460
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 55,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1508
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1509
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1510
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views batch (+top)"
+  },
+  {
+   "id": 405,
+   "type": "ImageBatch",
+   "pos": [
+    2740,
+    2550
+   ],
+   "size": [
+    200,
+    60
+   ],
+   "flags": {},
+   "order": 58,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1510
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1511
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1513
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Views batch (+bottom)"
+  },
+  {
+   "id": 406,
+   "type": "PrimitiveBoolean",
+   "pos": [
+    2740,
+    2650
+   ],
+   "size": [
+    200,
+    70
+   ],
+   "flags": {},
+   "order": 17,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "BOOLEAN",
+     "type": "BOOLEAN",
+     "links": [
+      1514,
+      1525
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PrimitiveBoolean",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_use_top_bottom_views",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "value": true
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 407,
+   "type": "ComfySwitchNode",
+   "pos": [
+    2740,
+    2760
+   ],
+   "size": [
+    200,
+    110
+   ],
+   "flags": {},
+   "order": 61,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "on_false",
+     "type": "IMAGE",
+     "link": 1512
+    },
+    {
+     "name": "on_true",
+     "type": "IMAGE",
+     "link": 1513
+    },
+    {
+     "name": "switch",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "switch"
+     },
+     "link": 1514
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "IMAGE",
+     "links": [
+      1515,
+      1545
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfySwitchNode",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Switch: 4 or 6 views",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "switch": true
+   }
+  },
+  {
+   "id": 408,
+   "type": "ComfyMathExpression",
+   "pos": [
+    3220,
+    2460
+   ],
+   "size": [
+    300,
+    110
+   ],
+   "flags": {},
+   "order": 30,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "values.a",
+     "type": "FLOAT,INT,BOOLEAN",
+     "link": 1518
+    }
+   ],
+   "outputs": [
+    {
+     "name": "FLOAT",
+     "type": "FLOAT",
+     "links": [
+      1519,
+      1526
+     ]
+    },
+    {
+     "name": "INT",
+     "type": "INT",
+     "links": []
+    },
+    {
+     "name": "BOOL",
+     "type": "BOOLEAN",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfyMathExpression",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Rig camera distance from in_fov",
+   "widgets_values": [
+    "0.55 / tan(a * 3.141592653589793 / 360)"
+   ],
+   "widgets_values_named": {
+    "expression": "0.55 / tan(a * 3.141592653589793 / 360)"
+   }
+  },
+  {
+   "id": 409,
+   "type": "CreateCameraInfo",
+   "pos": [
+    3220,
+    2610
+   ],
+   "size": [
+    300,
+    330
+   ],
+   "flags": {},
+   "order": 34,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mode.distance",
+     "type": "FLOAT",
+     "widget": {
+      "name": "mode.distance"
+     },
+     "link": 1519
+    },
+    {
+     "name": "fov",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov"
+     },
+     "link": 1520
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1521,
+      1522
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraInfo",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Rig camera (front)",
+   "widgets_values": [
+    "orbit",
+    0.0,
+    0.0,
+    3.12,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    20.0,
+    1.0,
+    "perspective"
+   ],
+   "widgets_values_named": {
+    "mode": "orbit",
+    "mode.yaw": 0.0,
+    "mode.pitch": 0.0,
+    "mode.distance": 3.12,
+    "target_x": 0.0,
+    "target_y": 0.0,
+    "target_z": 0.0,
+    "roll": 0.0,
+    "fov": 20.0,
+    "zoom": 1.0,
+    "camera_type": "perspective"
+   }
+  },
+  {
+   "id": 410,
+   "type": "CreateCameraOrbit",
+   "pos": [
+    3220,
+    2980
+   ],
+   "size": [
+    300,
+    150
+   ],
+   "flags": {},
+   "order": 43,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "link": 1521
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1523
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraOrbit",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Rig cameras: front, left, back, right",
+   "widgets_values": [
+    4,
+    360.0,
+    0.0,
+    "none"
+   ],
+   "widgets_values_named": {
+    "count": 4,
+    "yaw": 360.0,
+    "pitch": 0.0,
+    "poles": "none"
+   }
+  },
+  {
+   "id": 411,
+   "type": "CreateCameraOrbit",
+   "pos": [
+    2740,
+    2910
+   ],
+   "size": [
+    200,
+    150
+   ],
+   "flags": {},
+   "order": 44,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "link": 1522
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1524
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraOrbit",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Rig cameras + top, bottom",
+   "widgets_values": [
+    4,
+    360.0,
+    0.0,
+    "top and bottom"
+   ],
+   "widgets_values_named": {
+    "count": 4,
+    "yaw": 360.0,
+    "pitch": 0.0,
+    "poles": "top and bottom"
+   }
+  },
+  {
+   "id": 412,
+   "type": "ComfySwitchNode",
+   "pos": [
+    2740,
+    3100
+   ],
+   "size": [
+    200,
+    110
+   ],
+   "flags": {},
+   "order": 49,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "on_false",
+     "type": "LOAD3D_CAMERA",
+     "link": 1523
+    },
+    {
+     "name": "on_true",
+     "type": "LOAD3D_CAMERA",
+     "link": 1524
+    },
+    {
+     "name": "switch",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "switch"
+     },
+     "link": 1525
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1546
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfySwitchNode",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Switch: 4 or 6 cameras",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "switch": true
+   }
+  },
+  {
+   "id": 413,
+   "type": "CreateCameraInfo",
+   "pos": [
+    3560,
+    2460
+   ],
+   "size": [
+    300,
+    330
+   ],
+   "flags": {},
+   "order": 35,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mode.distance",
+     "type": "FLOAT",
+     "widget": {
+      "name": "mode.distance"
+     },
+     "link": 1526
+    },
+    {
+     "name": "fov",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov"
+     },
+     "link": 1527
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1529
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraInfo",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Rig camera (left)",
+   "widgets_values": [
+    "orbit",
+    90.0,
+    0.0,
+    3.12,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    20.0,
+    1.0,
+    "perspective"
+   ],
+   "widgets_values_named": {
+    "mode": "orbit",
+    "mode.yaw": 90.0,
+    "mode.pitch": 0.0,
+    "mode.distance": 3.12,
+    "target_x": 0.0,
+    "target_y": 0.0,
+    "target_z": 0.0,
+    "roll": 0.0,
+    "fov": 20.0,
+    "zoom": 1.0,
+    "camera_type": "perspective"
+   }
+  },
+  {
+   "id": 414,
+   "type": "RenderMesh",
+   "pos": [
+    3560,
+    2830
+   ],
+   "size": [
+    300,
+    200
+   ],
+   "flags": {},
+   "order": 95,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1528
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": 1529
+    },
+    {
+     "name": "texture",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      1530
+     ]
+    },
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RenderMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Generated texture seen from the left",
+   "widgets_values": [
+    "texture",
+    1024,
+    1024,
+    "#000000"
+   ],
+   "widgets_values_named": {
+    "mode": "texture",
+    "width": 1024,
+    "height": 1024,
+    "background": "#000000"
+   }
+  },
+  {
+   "id": 415,
+   "type": "ImageScale",
+   "pos": [
+    3560,
+    3070
+   ],
+   "size": [
+    300,
+    150
+   ],
+   "flags": {},
+   "order": 96,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1530
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": 1531
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": 1532
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1533
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageScale",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Scale to atlas size (so it can batch)",
+   "widgets_values": [
+    "bilinear",
+    4096,
+    4096,
+    "disabled"
+   ],
+   "widgets_values_named": {
+    "upscale_method": "bilinear",
+    "width": 4096,
+    "height": 4096,
+    "crop": "disabled"
+   }
+  },
+  {
+   "id": 416,
+   "type": "ImageBatch",
+   "pos": [
+    3900,
+    2460
+   ],
+   "size": [
+    220,
+    60
+   ],
+   "flags": {},
+   "order": 97,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image1",
+     "type": "IMAGE",
+     "link": 1533
+    },
+    {
+     "name": "image2",
+     "type": "IMAGE",
+     "link": 1534
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1535
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "[side render, generated atlas]"
+  },
+  {
+   "id": 417,
+   "type": "ColorTransfer",
+   "pos": [
+    3900,
+    2560
+   ],
+   "size": [
+    300,
+    180
+   ],
+   "flags": {},
+   "order": 98,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image_target",
+     "type": "IMAGE",
+     "link": 1535
+    },
+    {
+     "name": "image_ref",
+     "type": "IMAGE",
+     "link": 1536
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1537
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ColorTransfer",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Match generated colours to the left view",
+   "widgets_values": [
+    "reinhard_lab",
+    "target_frame",
+    0,
+    1.0
+   ],
+   "widgets_values_named": {
+    "method": "reinhard_lab",
+    "source_stats": "target_frame",
+    "source_stats.target_index": 0,
+    "strength": 1.0
+   }
+  },
+  {
+   "id": 418,
+   "type": "ImageFromBatch",
+   "pos": [
+    3900,
+    2780
+   ],
+   "size": [
+    220,
+    100
+   ],
+   "flags": {},
+   "order": 99,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1537
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1539
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageFromBatch",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Corrected atlas",
+   "widgets_values": [
+    1,
+    1
+   ],
+   "widgets_values_named": {
+    "batch_index": 1,
+    "length": 1
+   }
+  },
+  {
+   "id": 419,
+   "type": "ApplyTextureToMesh",
+   "pos": [
+    3900,
+    2920
+   ],
+   "size": [
+    260,
+    150
+   ],
+   "flags": {},
+   "order": 100,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1538
+    },
+    {
+     "name": "base_color",
+     "type": "IMAGE",
+     "link": 1539
+    },
+    {
+     "name": "metallic",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1540
+    },
+    {
+     "name": "roughness",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1541
+    },
+    {
+     "name": "occlusion",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1542
+    },
+    {
+     "name": "normal_map",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1543
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1544
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ApplyTextureToMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Apply corrected generated texture"
+  },
+  {
+   "id": 420,
+   "type": "BakeTextureFromViews",
+   "pos": [
+    4240,
+    2460
+   ],
+   "size": [
+    300,
+    200
+   ],
+   "flags": {},
+   "order": 101,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1544
+    },
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1545
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": 1546
+    },
+    {
+     "name": "mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": 1547
+    },
+    {
+     "name": "resolution",
+     "type": "INT",
+     "widget": {
+      "name": "resolution"
+     },
+     "link": 1548
+    }
+   ],
+   "outputs": [
+    {
+     "name": "base_color",
+     "type": "IMAGE",
+     "links": [
+      1550
+     ]
+    },
+    {
+     "name": "confidence",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BakeTextureFromViews",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Project the views (onto corrected texture)",
+   "widgets_values": [
+    0,
+    4.0,
+    true
+   ],
+   "widgets_values_named": {
+    "resolution": 0,
+    "blend_exponent": 4.0,
+    "fill_unseen": true
+   }
+  },
+  {
+   "id": 421,
+   "type": "ApplyTextureToMesh",
+   "pos": [
+    4240,
+    2710
+   ],
+   "size": [
+    260,
+    150
+   ],
+   "flags": {},
+   "order": 102,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1549
+    },
+    {
+     "name": "base_color",
+     "type": "IMAGE",
+     "link": 1550
+    },
+    {
+     "name": "metallic",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1551
+    },
+    {
+     "name": "roughness",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1552
+    },
+    {
+     "name": "occlusion",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1553
+    },
+    {
+     "name": "normal_map",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 1554
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      1556
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ApplyTextureToMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Apply projected texture"
+  },
+  {
+   "id": 422,
+   "type": "PrimitiveBoolean",
+   "pos": [
+    4240,
+    2910
+   ],
+   "size": [
+    270,
+    70
+   ],
+   "flags": {},
+   "order": 18,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "BOOLEAN",
+     "type": "BOOLEAN",
+     "links": [
+      1557
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PrimitiveBoolean",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "in_use_view_projection",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "value": true
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 423,
+   "type": "ComfySwitchNode",
+   "pos": [
+    4240,
+    3020
+   ],
+   "size": [
+    270,
+    110
+   ],
+   "flags": {},
+   "order": 103,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "on_false",
+     "type": "MESH",
+     "link": 1555
+    },
+    {
+     "name": "on_true",
+     "type": "MESH",
+     "link": 1556
+    },
+    {
+     "name": "switch",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "switch"
+     },
+     "link": 1557
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "MESH",
+     "links": [
+      1558
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ComfySwitchNode",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Switch: view projection",
+   "widgets_values": [
+    true
+   ],
+   "widgets_values_named": {
+    "switch": true
+   }
+  },
+  {
+   "id": 424,
+   "type": "MarkdownNote",
+   "pos": [
+    4550,
+    2460
+   ],
+   "size": [
+    380,
+    330
+   ],
+   "flags": {},
+   "order": 19,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "**in_use_view_projection** true = paint the four reference views straight onto the mesh, so every surface a view sees gets its real colours and detail. The generated texture fills what no view sees (top, bottom, inside the engines), colour-matched to the views.\n\nNeeds all four views. The cameras follow `in_fov`.\n\nfalse = the model's generated texture only."
+   ],
+   "widgets_values_named": {
+    "text": "**in_use_view_projection** true = paint the four reference views straight onto the mesh, so every surface a view sees gets its real colours and detail. The generated texture fills what no view sees (top, bottom, inside the engines), colour-matched to the views.\n\nNeeds all four views. The cameras follow `in_fov`.\n\nfalse = the model's generated texture only."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 425,
+   "type": "CreateCameraInfo",
+   "pos": [
+    1560,
+    2460
+   ],
+   "size": [
+    300,
+    330
+   ],
+   "flags": {},
+   "order": 106,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "shape": 7,
+     "type": "MESH",
+     "link": 1559
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1560
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraInfo",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Preview camera",
+   "widgets_values": [
+    "orbit",
+    35.0,
+    20.0,
+    1.9,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    35.0,
+    1.0,
+    "perspective"
+   ],
+   "widgets_values_named": {
+    "mode": "orbit",
+    "mode.yaw": 35.0,
+    "mode.pitch": 20.0,
+    "mode.distance": 1.9,
+    "target_x": 0.0,
+    "target_y": 0.0,
+    "target_z": 0.0,
+    "roll": 0.0,
+    "fov": 35.0,
+    "zoom": 1.0,
+    "camera_type": "perspective"
+   }
+  },
+  {
+   "id": 426,
+   "type": "CreateCameraOrbit",
+   "pos": [
+    1890,
+    2460
+   ],
+   "size": [
+    270,
+    150
+   ],
+   "flags": {},
+   "order": 108,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "link": 1560
+    }
+   ],
+   "outputs": [
+    {
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": [
+      1562,
+      1565
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateCameraOrbit",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Preview orbit",
+   "widgets_values": [
+    4,
+    360.0,
+    0.0,
+    "none"
+   ],
+   "widgets_values_named": {
+    "count": 4,
+    "yaw": 360.0,
+    "pitch": 0.0,
+    "poles": "none"
+   }
+  },
+  {
+   "id": 427,
+   "type": "RenderMesh",
+   "pos": [
+    2190,
+    2460
+   ],
+   "size": [
+    300,
+    200
+   ],
+   "flags": {},
+   "order": 109,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1561
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": 1562
+    },
+    {
+     "name": "texture",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      1563
+     ]
+    },
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RenderMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Preview render (textured)",
+   "widgets_values": [
+    "auto",
+    768,
+    768,
+    "#202020"
+   ],
+   "widgets_values_named": {
+    "mode": "auto",
+    "width": 768,
+    "height": 768,
+    "background": "#202020"
+   }
+  },
+  {
+   "id": 428,
+   "type": "SaveImage",
+   "pos": [
+    2520,
+    2460
+   ],
+   "size": [
+    300,
+    220
+   ],
+   "flags": {},
+   "order": 111,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1563
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "out_preview_textured",
+   "widgets_values": [
+    "3d/asset3d-pixal3d-mv_preview_textured"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "3d/asset3d-pixal3d-mv_preview_textured"
+   }
+  },
+  {
+   "id": 429,
+   "type": "RenderMesh",
+   "pos": [
+    2190,
+    2710
+   ],
+   "size": [
+    300,
+    200
+   ],
+   "flags": {},
+   "order": 110,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 1564
+    },
+    {
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": 1565
+    },
+    {
+     "name": "texture",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      1566
+     ]
+    },
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RenderMesh",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "Preview render (clay)",
+   "widgets_values": [
+    "solid",
+    768,
+    768,
+    "#202020"
+   ],
+   "widgets_values_named": {
+    "mode": "solid",
+    "width": 768,
+    "height": 768,
+    "background": "#202020"
+   }
+  },
+  {
+   "id": 430,
+   "type": "SaveImage",
+   "pos": [
+    2520,
+    2710
+   ],
+   "size": [
+    300,
+    220
+   ],
+   "flags": {},
+   "order": 112,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1566
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveImage",
+    "cnr_id": "comfy-core",
+    "ver": "0.46.2"
+   },
+   "title": "out_preview_clay",
+   "widgets_values": [
+    "3d/asset3d-pixal3d-mv_preview_clay"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "3d/asset3d-pixal3d-mv_preview_clay"
+   }
+  },
+  {
+   "id": 431,
+   "type": "MarkdownNote",
+   "pos": [
+    -4320,
+    250
+   ],
+   "size": [
+    860,
+    1000
+   ],
+   "flags": {},
+   "order": 20,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 20 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
+   ],
+   "widgets_values_named": {
+    "text": "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 20 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
+   },
+   "color": "#222",
+   "bgcolor": "#000",
+   "title": "How to use"
+  },
+  {
+   "id": 432,
+   "type": "MarkdownNote",
+   "pos": [
+    -4320,
+    1290
+   ],
+   "size": [
+    860,
+    620
+   ],
+   "flags": {},
+   "order": 21,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "## Settings worth knowing\n\n| node | default | what it does |\n|---|---|---|\n| `in_shape_image_mode` | original | `greyscale` strips colour from the views that drive the **shape** stages. Texture always uses the colour views. Unproven either way: A/B it per asset. |\n| `in_shape_resolution` | 1024 | Voxel resolution of the hi-res shape pass. 1536 is the quality tier and needs much more VRAM. |\n| `in_use_ultrashape` | true | Refine geometry with UltraShape 1.0. |\n| `in_ultrashape` | octree 384, 16384 latents, low_vram | Raise octree to 512, then latents to 32768, one at a time. |\n| `in_target_faces` | 700000 | Faces of the delivered mesh. Detail above this lives in the baked normal map. |\n| `in_texture_resolution` | 4096 | Texture atlas size. |\n| `in_seed_*` | fixed | One seed per stage. Change `in_seed_shape` first if the shape is wrong. |\n\nOutput: `output/3d/` as GLB with base colour, metallic, roughness, ambient occlusion and a normal map baked\nfrom the high-poly mesh.\n\n**Not yet run.** These graphs were assembled from the stock templates without a test render. See SETUP.md\nfor the first-run checklist.\n"
+   ],
+   "widgets_values_named": {
+    "text": "## Settings worth knowing\n\n| node | default | what it does |\n|---|---|---|\n| `in_shape_image_mode` | original | `greyscale` strips colour from the views that drive the **shape** stages. Texture always uses the colour views. Unproven either way: A/B it per asset. |\n| `in_shape_resolution` | 1024 | Voxel resolution of the hi-res shape pass. 1536 is the quality tier and needs much more VRAM. |\n| `in_use_ultrashape` | true | Refine geometry with UltraShape 1.0. |\n| `in_ultrashape` | octree 384, 16384 latents, low_vram | Raise octree to 512, then latents to 32768, one at a time. |\n| `in_target_faces` | 700000 | Faces of the delivered mesh. Detail above this lives in the baked normal map. |\n| `in_texture_resolution` | 4096 | Texture atlas size. |\n| `in_seed_*` | fixed | One seed per stage. Change `in_seed_shape` first if the shape is wrong. |\n\nOutput: `output/3d/` as GLB with base colour, metallic, roughness, ambient occlusion and a normal map baked\nfrom the high-poly mesh.\n\n**Not yet run.** These graphs were assembled from the stock templates without a test render. See SETUP.md\nfor the first-run checklist.\n"
+   },
+   "color": "#222",
+   "bgcolor": "#000",
+   "title": "Settings"
+  }
+ ],
+ "links": [
+  [
+   509,
+   87,
+   0,
+   3,
+   3,
+   "LATENT"
+  ],
+  [
+   539,
+   91,
+   0,
+   18,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   540,
+   91,
+   1,
+   18,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   541,
+   91,
+   2,
+   18,
+   3,
+   "LATENT"
+  ],
+  [
+   551,
+   23,
+   0,
+   92,
+   0,
+   "LATENT"
+  ],
+  [
+   556,
+   12,
+   0,
+   93,
+   0,
+   "LATENT"
+  ],
+  [
+   558,
+   92,
+   1,
+   93,
+   2,
+   "SHAPE_SUBDIVIDES"
+  ],
+  [
+   564,
+   91,
+   0,
+   94,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   565,
+   91,
+   1,
+   94,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   566,
+   18,
+   0,
+   94,
+   2,
+   "LATENT"
+  ],
+  [
+   567,
+   94,
+   0,
+   23,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   568,
+   94,
+   1,
+   23,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   569,
+   94,
+   2,
+   23,
+   3,
+   "LATENT"
+  ],
+  [
+   584,
+   23,
+   0,
+   98,
+   2,
+   "LATENT"
+  ],
+  [
+   585,
+   98,
+   0,
+   12,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   586,
+   98,
+   1,
+   12,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   587,
+   98,
+   2,
+   12,
+   3,
+   "LATENT"
+  ],
+  [
+   632,
+   118,
+   0,
+   93,
+   1,
+   "VAE"
+  ],
+  [
+   633,
+   3,
+   0,
+   119,
+   0,
+   "LATENT"
+  ],
+  [
+   635,
+   119,
+   0,
+   4,
+   0,
+   "VOXEL"
+  ],
+  [
+   636,
+   119,
+   0,
+   91,
+   2,
+   "VOXEL"
+  ],
+  [
+   725,
+   93,
+   0,
+   147,
+   1,
+   "VOXEL"
+  ],
+  [
+   887,
+   193,
+   0,
+   192,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   900,
+   196,
+   0,
+   147,
+   0,
+   "MESH"
+  ],
+  [
+   904,
+   199,
+   0,
+   125,
+   0,
+   "MODEL"
+  ],
+  [
+   906,
+   92,
+   0,
+   202,
+   0,
+   "MESH"
+  ],
+  [
+   923,
+   147,
+   0,
+   164,
+   0,
+   "IMAGE"
+  ],
+  [
+   935,
+   196,
+   0,
+   210,
+   0,
+   "MESH"
+  ],
+  [
+   940,
+   147,
+   1,
+   207,
+   0,
+   "IMAGE"
+  ],
+  [
+   941,
+   147,
+   2,
+   208,
+   0,
+   "IMAGE"
+  ],
+  [
+   962,
+   108,
+   0,
+   3,
+   0,
+   "MODEL"
+  ],
+  [
+   966,
+   126,
+   0,
+   18,
+   0,
+   "MODEL"
+  ],
+  [
+   976,
+   125,
+   0,
+   108,
+   0,
+   "MODEL"
+  ],
+  [
+   1017,
+   224,
+   0,
+   226,
+   0,
+   "IMAGE"
+  ],
+  [
+   1044,
+   233,
+   0,
+   235,
+   0,
+   "IMAGE"
+  ],
+  [
+   1060,
+   186,
+   0,
+   238,
+   0,
+   "MESH"
+  ],
+  [
+   1061,
+   238,
+   0,
+   196,
+   0,
+   "MESH"
+  ],
+  [
+   1066,
+   196,
+   0,
+   224,
+   0,
+   "MESH"
+  ],
+  [
+   1069,
+   196,
+   0,
+   233,
+   0,
+   "MESH"
+  ],
+  [
+   1070,
+   202,
+   0,
+   241,
+   0,
+   "MESH"
+  ],
+  [
+   1096,
+   4,
+   0,
+   247,
+   0,
+   "MESH"
+  ],
+  [
+   1097,
+   247,
+   0,
+   246,
+   0,
+   "FILE_3D_GLB"
+  ],
+  [
+   1108,
+   126,
+   0,
+   23,
+   0,
+   "MODEL"
+  ],
+  [
+   1110,
+   93,
+   0,
+   252,
+   1,
+   "VOXEL"
+  ],
+  [
+   1132,
+   196,
+   0,
+   261,
+   0,
+   "MESH"
+  ],
+  [
+   1133,
+   261,
+   0,
+   262,
+   0,
+   "IMAGE"
+  ],
+  [
+   1164,
+   279,
+   0,
+   126,
+   0,
+   "MODEL"
+  ],
+  [
+   1174,
+   252,
+   0,
+   282,
+   0,
+   "MESH"
+  ],
+  [
+   1176,
+   260,
+   0,
+   285,
+   0,
+   "MESH"
+  ],
+  [
+   1185,
+   288,
+   0,
+   196,
+   1,
+   "INT"
+  ],
+  [
+   1186,
+   288,
+   0,
+   147,
+   3,
+   "INT"
+  ],
+  [
+   1199,
+   238,
+   0,
+   252,
+   0,
+   "MESH"
+  ],
+  [
+   1253,
+   117,
+   0,
+   119,
+   1,
+   "VAE"
+  ],
+  [
+   1265,
+   117,
+   0,
+   94,
+   3,
+   "VAE"
+  ],
+  [
+   1266,
+   117,
+   0,
+   92,
+   1,
+   "VAE"
+  ],
+  [
+   1268,
+   235,
+   0,
+   210,
+   4,
+   "IMAGE"
+  ],
+  [
+   1269,
+   226,
+   0,
+   210,
+   5,
+   "IMAGE"
+  ],
+  [
+   1270,
+   164,
+   0,
+   210,
+   1,
+   "IMAGE"
+  ],
+  [
+   1271,
+   207,
+   0,
+   210,
+   2,
+   "IMAGE"
+  ],
+  [
+   1272,
+   208,
+   0,
+   210,
+   3,
+   "IMAGE"
+  ],
+  [
+   1296,
+   282,
+   0,
+   323,
+   0,
+   "FILE_3D_GLB"
+  ],
+  [
+   1301,
+   319,
+   0,
+   199,
+   0,
+   "MODEL"
+  ],
+  [
+   1302,
+   319,
+   0,
+   279,
+   0,
+   "MODEL"
+  ],
+  [
+   1303,
+   319,
+   0,
+   12,
+   0,
+   "MODEL"
+  ],
+  [
+   1304,
+   15,
+   0,
+   324,
+   0,
+   "CLIP_VISION"
+  ],
+  [
+   1305,
+   324,
+   0,
+   3,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   1306,
+   324,
+   1,
+   3,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   1307,
+   324,
+   0,
+   91,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   1308,
+   324,
+   1,
+   91,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   1372,
+   193,
+   0,
+   348,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1376,
+   193,
+   0,
+   351,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1384,
+   193,
+   0,
+   353,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1442,
+   285,
+   0,
+   372,
+   0,
+   "FILE_3D_GLB"
+  ],
+  [
+   1443,
+   378,
+   0,
+   192,
+   1,
+   "IMAGE"
+  ],
+  [
+   1444,
+   378,
+   0,
+   377,
+   0,
+   "IMAGE"
+  ],
+  [
+   1445,
+   192,
+   0,
+   377,
+   4,
+   "MASK"
+  ],
+  [
+   1446,
+   377,
+   0,
+   340,
+   0,
+   "IMAGE"
+  ],
+  [
+   1447,
+   379,
+   0,
+   348,
+   1,
+   "IMAGE"
+  ],
+  [
+   1448,
+   379,
+   0,
+   377,
+   1,
+   "IMAGE"
+  ],
+  [
+   1449,
+   348,
+   0,
+   377,
+   5,
+   "MASK"
+  ],
+  [
+   1450,
+   377,
+   1,
+   344,
+   0,
+   "IMAGE"
+  ],
+  [
+   1451,
+   380,
+   0,
+   351,
+   1,
+   "IMAGE"
+  ],
+  [
+   1452,
+   380,
+   0,
+   377,
+   2,
+   "IMAGE"
+  ],
+  [
+   1453,
+   351,
+   0,
+   377,
+   6,
+   "MASK"
+  ],
+  [
+   1454,
+   377,
+   2,
+   343,
+   0,
+   "IMAGE"
+  ],
+  [
+   1455,
+   381,
+   0,
+   353,
+   1,
+   "IMAGE"
+  ],
+  [
+   1456,
+   381,
+   0,
+   377,
+   3,
+   "IMAGE"
+  ],
+  [
+   1457,
+   353,
+   0,
+   377,
+   7,
+   "MASK"
+  ],
+  [
+   1458,
+   377,
+   3,
+   346,
+   0,
+   "IMAGE"
+  ],
+  [
+   1459,
+   193,
+   0,
+   383,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1460,
+   382,
+   0,
+   383,
+   1,
+   "IMAGE"
+  ],
+  [
+   1461,
+   382,
+   0,
+   377,
+   8,
+   "IMAGE"
+  ],
+  [
+   1462,
+   383,
+   0,
+   377,
+   10,
+   "MASK"
+  ],
+  [
+   1463,
+   377,
+   4,
+   384,
+   0,
+   "IMAGE"
+  ],
+  [
+   1464,
+   193,
+   0,
+   386,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1465,
+   385,
+   0,
+   386,
+   1,
+   "IMAGE"
+  ],
+  [
+   1466,
+   385,
+   0,
+   377,
+   9,
+   "IMAGE"
+  ],
+  [
+   1467,
+   386,
+   0,
+   377,
+   11,
+   "MASK"
+  ],
+  [
+   1468,
+   377,
+   5,
+   387,
+   0,
+   "IMAGE"
+  ],
+  [
+   1469,
+   340,
+   0,
+   388,
+   0,
+   "IMAGE"
+  ],
+  [
+   1470,
+   388,
+   0,
+   324,
+   1,
+   "IMAGE"
+  ],
+  [
+   1471,
+   340,
+   0,
+   389,
+   1,
+   "IMAGE"
+  ],
+  [
+   1472,
+   344,
+   0,
+   388,
+   1,
+   "IMAGE"
+  ],
+  [
+   1473,
+   388,
+   1,
+   324,
+   2,
+   "IMAGE"
+  ],
+  [
+   1474,
+   344,
+   0,
+   389,
+   2,
+   "IMAGE"
+  ],
+  [
+   1475,
+   343,
+   0,
+   388,
+   2,
+   "IMAGE"
+  ],
+  [
+   1476,
+   388,
+   2,
+   324,
+   3,
+   "IMAGE"
+  ],
+  [
+   1477,
+   343,
+   0,
+   389,
+   3,
+   "IMAGE"
+  ],
+  [
+   1478,
+   346,
+   0,
+   388,
+   3,
+   "IMAGE"
+  ],
+  [
+   1479,
+   388,
+   3,
+   324,
+   4,
+   "IMAGE"
+  ],
+  [
+   1480,
+   346,
+   0,
+   389,
+   4,
+   "IMAGE"
+  ],
+  [
+   1481,
+   15,
+   0,
+   389,
+   0,
+   "CLIP_VISION"
+  ],
+  [
+   1482,
+   390,
+   0,
+   324,
+   5,
+   "FLOAT"
+  ],
+  [
+   1483,
+   390,
+   0,
+   389,
+   5,
+   "FLOAT"
+  ],
+  [
+   1484,
+   389,
+   0,
+   98,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   1485,
+   389,
+   1,
+   98,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   1486,
+   92,
+   0,
+   397,
+   0,
+   "MESH"
+  ],
+  [
+   1487,
+   241,
+   0,
+   397,
+   1,
+   "MESH"
+  ],
+  [
+   1488,
+   394,
+   0,
+   397,
+   2,
+   "BOOLEAN"
+  ],
+  [
+   1489,
+   397,
+   0,
+   147,
+   2,
+   "MESH"
+  ],
+  [
+   1490,
+   241,
+   0,
+   391,
+   0,
+   "MESH"
+  ],
+  [
+   1491,
+   391,
+   0,
+   393,
+   0,
+   "MESH"
+  ],
+  [
+   1492,
+   340,
+   0,
+   393,
+   1,
+   "IMAGE"
+  ],
+  [
+   1493,
+   193,
+   0,
+   392,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   1494,
+   340,
+   0,
+   392,
+   1,
+   "IMAGE"
+  ],
+  [
+   1495,
+   392,
+   0,
+   393,
+   2,
+   "MASK"
+  ],
+  [
+   1496,
+   241,
+   0,
+   395,
+   0,
+   "MESH"
+  ],
+  [
+   1497,
+   393,
+   0,
+   395,
+   1,
+   "MESH"
+  ],
+  [
+   1498,
+   394,
+   0,
+   395,
+   2,
+   "BOOLEAN"
+  ],
+  [
+   1499,
+   395,
+   0,
+   186,
+   0,
+   "MESH"
+  ],
+  [
+   1500,
+   395,
+   0,
+   233,
+   1,
+   "MESH"
+  ],
+  [
+   1501,
+   395,
+   0,
+   224,
+   1,
+   "MESH"
+  ],
+  [
+   1502,
+   340,
+   0,
+   398,
+   0,
+   "IMAGE"
+  ],
+  [
+   1503,
+   344,
+   0,
+   398,
+   1,
+   "IMAGE"
+  ],
+  [
+   1504,
+   398,
+   0,
+   399,
+   0,
+   "IMAGE"
+  ],
+  [
+   1505,
+   343,
+   0,
+   399,
+   1,
+   "IMAGE"
+  ],
+  [
+   1506,
+   399,
+   0,
+   400,
+   0,
+   "IMAGE"
+  ],
+  [
+   1507,
+   346,
+   0,
+   400,
+   1,
+   "IMAGE"
+  ],
+  [
+   1508,
+   400,
+   0,
+   404,
+   0,
+   "IMAGE"
+  ],
+  [
+   1509,
+   377,
+   4,
+   404,
+   1,
+   "IMAGE"
+  ],
+  [
+   1510,
+   404,
+   0,
+   405,
+   0,
+   "IMAGE"
+  ],
+  [
+   1511,
+   377,
+   5,
+   405,
+   1,
+   "IMAGE"
+  ],
+  [
+   1512,
+   400,
+   0,
+   407,
+   0,
+   "IMAGE"
+  ],
+  [
+   1513,
+   405,
+   0,
+   407,
+   1,
+   "IMAGE"
+  ],
+  [
+   1514,
+   406,
+   0,
+   407,
+   2,
+   "BOOLEAN"
+  ],
+  [
+   1515,
+   407,
+   0,
+   401,
+   0,
+   "IMAGE"
+  ],
+  [
+   1516,
+   401,
+   0,
+   402,
+   0,
+   "MASK"
+  ],
+  [
+   1517,
+   402,
+   0,
+   403,
+   0,
+   "MASK"
+  ],
+  [
+   1518,
+   390,
+   0,
+   408,
+   0,
+   "FLOAT"
+  ],
+  [
+   1519,
+   408,
+   0,
+   409,
+   0,
+   "FLOAT"
+  ],
+  [
+   1520,
+   390,
+   0,
+   409,
+   1,
+   "FLOAT"
+  ],
+  [
+   1521,
+   409,
+   0,
+   410,
+   0,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1522,
+   409,
+   0,
+   411,
+   0,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1523,
+   410,
+   0,
+   412,
+   0,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1524,
+   411,
+   0,
+   412,
+   1,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1525,
+   406,
+   0,
+   412,
+   2,
+   "BOOLEAN"
+  ],
+  [
+   1526,
+   408,
+   0,
+   413,
+   0,
+   "FLOAT"
+  ],
+  [
+   1527,
+   390,
+   0,
+   413,
+   1,
+   "FLOAT"
+  ],
+  [
+   1528,
+   210,
+   0,
+   414,
+   0,
+   "MESH"
+  ],
+  [
+   1529,
+   413,
+   0,
+   414,
+   2,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1530,
+   414,
+   0,
+   415,
+   0,
+   "IMAGE"
+  ],
+  [
+   1531,
+   288,
+   0,
+   415,
+   1,
+   "INT"
+  ],
+  [
+   1532,
+   288,
+   0,
+   415,
+   2,
+   "INT"
+  ],
+  [
+   1533,
+   415,
+   0,
+   416,
+   0,
+   "IMAGE"
+  ],
+  [
+   1534,
+   164,
+   0,
+   416,
+   1,
+   "IMAGE"
+  ],
+  [
+   1535,
+   416,
+   0,
+   417,
+   0,
+   "IMAGE"
+  ],
+  [
+   1536,
+   344,
+   0,
+   417,
+   1,
+   "IMAGE"
+  ],
+  [
+   1537,
+   417,
+   0,
+   418,
+   0,
+   "IMAGE"
+  ],
+  [
+   1538,
+   196,
+   0,
+   419,
+   0,
+   "MESH"
+  ],
+  [
+   1539,
+   418,
+   0,
+   419,
+   1,
+   "IMAGE"
+  ],
+  [
+   1540,
+   207,
+   0,
+   419,
+   2,
+   "IMAGE"
+  ],
+  [
+   1541,
+   208,
+   0,
+   419,
+   3,
+   "IMAGE"
+  ],
+  [
+   1542,
+   235,
+   0,
+   419,
+   4,
+   "IMAGE"
+  ],
+  [
+   1543,
+   226,
+   0,
+   419,
+   5,
+   "IMAGE"
+  ],
+  [
+   1544,
+   419,
+   0,
+   420,
+   0,
+   "MESH"
+  ],
+  [
+   1545,
+   407,
+   0,
+   420,
+   1,
+   "IMAGE"
+  ],
+  [
+   1546,
+   412,
+   0,
+   420,
+   2,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1547,
+   403,
+   0,
+   420,
+   3,
+   "MASK"
+  ],
+  [
+   1548,
+   288,
+   0,
+   420,
+   4,
+   "INT"
+  ],
+  [
+   1549,
+   196,
+   0,
+   421,
+   0,
+   "MESH"
+  ],
+  [
+   1550,
+   420,
+   0,
+   421,
+   1,
+   "IMAGE"
+  ],
+  [
+   1551,
+   207,
+   0,
+   421,
+   2,
+   "IMAGE"
+  ],
+  [
+   1552,
+   208,
+   0,
+   421,
+   3,
+   "IMAGE"
+  ],
+  [
+   1553,
+   235,
+   0,
+   421,
+   4,
+   "IMAGE"
+  ],
+  [
+   1554,
+   226,
+   0,
+   421,
+   5,
+   "IMAGE"
+  ],
+  [
+   1555,
+   210,
+   0,
+   423,
+   0,
+   "MESH"
+  ],
+  [
+   1556,
+   421,
+   0,
+   423,
+   1,
+   "MESH"
+  ],
+  [
+   1557,
+   422,
+   0,
+   423,
+   2,
+   "BOOLEAN"
+  ],
+  [
+   1558,
+   423,
+   0,
+   260,
+   0,
+   "MESH"
+  ],
+  [
+   1559,
+   260,
+   0,
+   425,
+   0,
+   "MESH"
+  ],
+  [
+   1560,
+   425,
+   0,
+   426,
+   0,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1561,
+   260,
+   0,
+   427,
+   0,
+   "MESH"
+  ],
+  [
+   1562,
+   426,
+   0,
+   427,
+   2,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1563,
+   427,
+   0,
+   428,
+   0,
+   "IMAGE"
+  ],
+  [
+   1564,
+   395,
+   0,
+   429,
+   0,
+   "MESH"
+  ],
+  [
+   1565,
+   426,
+   0,
+   429,
+   2,
+   "LOAD3D_CAMERA"
+  ],
+  [
+   1566,
+   429,
+   0,
+   430,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [
+  {
+   "id": 1,
+   "title": "Sparse Structure Generation",
+   "bounding": [
+    -880,
+    580,
+    2360,
+    640
+   ],
+   "color": "#8A8",
+   "flags": {}
+  },
+  {
+   "id": 2,
+   "title": "Shape Generation",
+   "bounding": [
+    -880,
+    1250,
+    1450,
+    560
+   ],
+   "color": "#88A",
+   "flags": {}
+  },
+  {
+   "id": 3,
+   "title": "Texture Generation",
+   "bounding": [
+    600,
+    1250,
+    880,
+    560
+   ],
+   "color": "#b58b2a",
+   "flags": {}
+  },
+  {
+   "id": 6,
+   "title": "Mesh Post-Processing",
+   "bounding": [
+    1510,
+    200,
+    1500,
+    760
+   ],
+   "color": "#A88",
+   "flags": {}
+  },
+  {
+   "id": 7,
+   "title": "Texture baking",
+   "bounding": [
+    1510,
+    990,
+    2430,
+    1346
+   ],
+   "flags": {}
+  },
+  {
+   "id": 8,
+   "title": "Vertex color preview",
+   "bounding": [
+    3060,
+    200,
+    890,
+    760
+   ],
+   "color": "#a1309b",
+   "flags": {}
+  },
+  {
+   "id": 16,
+   "title": "Conditioning",
+   "bounding": [
+    -1630,
+    1250,
+    720,
+    290
+   ],
+   "color": "#b58b2a",
+   "flags": {}
+  },
+  {
+   "id": 19,
+   "title": "Preprocess Multiview Images",
+   "bounding": [
+    -2870,
+    290,
+    1160,
+    1780
+   ],
+   "color": "#88A",
+   "flags": {}
+  },
+  {
+   "id": 21,
+   "title": "Models",
+   "bounding": [
+    -1620,
+    580,
+    710,
+    640
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  },
+  {
+   "id": 22,
+   "title": "Reference views (90 degrees apart, same scale)",
+   "bounding": [
+    -3400,
+    250,
+    500,
+    1880
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  },
+  {
+   "id": 23,
+   "title": "Top and bottom views (nose up; texture only)",
+   "bounding": [
+    -3400,
+    2140,
+    1700,
+    900
+   ],
+   "color": "#b58b2a",
+   "flags": {}
+  },
+  {
+   "id": 24,
+   "title": "Shape / texture images",
+   "bounding": [
+    -1650,
+    1550,
+    720,
+    350
+   ],
+   "color": "#8A8",
+   "flags": {}
+  },
+  {
+   "id": 25,
+   "title": "UltraShape refine (geometry only)",
+   "bounding": [
+    1510,
+    -420,
+    1500,
+    570
+   ],
+   "color": "#a1309b",
+   "flags": {}
+  },
+  {
+   "id": 26,
+   "title": "Project the reference views onto the mesh",
+   "bounding": [
+    2950,
+    2390,
+    2020,
+    870
+   ],
+   "color": "#b58b2a",
+   "flags": {}
+  },
+  {
+   "id": 27,
+   "title": "Preview renders",
+   "bounding": [
+    1530,
+    2390,
+    1320,
+    580
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.6379417093463107,
+   "offset": [
+    -314.5446676518136,
+    369.55291331970716
+   ]
+  },
+  "frontendVersion": "1.55.18",
+  "VHS_latentpreview": false,
+  "VHS_latentpreviewrate": 0,
+  "VHS_MetadataImage": true,
+  "VHS_KeepIntermediate": true
+ },
+ "version": 0.4
+}
