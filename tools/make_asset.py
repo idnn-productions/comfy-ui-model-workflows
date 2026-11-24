@@ -4,7 +4,8 @@
         --length 40 --out <project>/models/ship6 --comfy-input <ComfyUI input folder>
 
 Steps: copy the views into ComfyUI's input folder, queue the six-view workflow on the running ComfyUI and wait,
-run the Blender fix pass on the result (real-world scale, pivot, compressed textures), and write
+optionally clean the mesh up into quads (--quads, tools/blender_retopo.py with AutoRemesher), run the Blender fix
+pass on the result (real-world scale, pivot, compressed textures), and write
 <out>/<name>.glb with <out>/<name>.refs/ holding the reference images, which is the layout the NFGames Map
 Editor's model viewer shows.
 
@@ -26,6 +27,7 @@ from queue_workflow import get, to_prompt  # noqa: E402
 
 SIDES = ("front", "left", "back", "right")
 POLES = ("top", "bottom")
+SOURCE_FACES = 200000  # triangles of the generated mesh when it is cleaned up into quads afterwards
 BLENDER_DEFAULT = r"C:\Program Files\Blender Foundation\Blender 5.3\blender.exe"
 
 
@@ -47,6 +49,8 @@ def main():
     p.add_argument("--length", type=float, required=True, help="the asset's longest side, in metres")
     p.add_argument("--faces", type=int, default=60000, help="triangles of the delivered mesh")
     p.add_argument("--pivot", choices=["centre", "base"], default="centre")
+    p.add_argument("--quads", type=int, default=0, help="clean up into about this many quads with new UVs and re-baked maps (0: keep the generated triangles)")
+    p.add_argument("--autoremesher", default=os.environ.get("AUTOREMESHER", "autoremesher"), help="the AutoRemesher program, for --quads")
     p.add_argument("--no-ultrashape", action="store_true")
     p.add_argument("--url", default="http://127.0.0.1:8188")
     p.add_argument("--blender", default=os.environ.get("BLENDER", BLENDER_DEFAULT))
@@ -84,7 +88,8 @@ def main():
         set_input(f"in_{n}_image", "image", rel(n) if have_poles else rel("front"))
     set_input("in_use_top_bottom_views", "value", have_poles)
     set_input("in_use_ultrashape", "value", not args.no_ultrashape)
-    set_input("in_target_faces", "target_face_count", args.faces)
+    # for a clean-up the generated mesh is only what the quads and their maps are made from: keep more of it
+    set_input("in_target_faces", "target_face_count", max(args.faces, SOURCE_FACES) if args.quads else args.faces)
     prefix = f"3d/{args.name}"
     set_input("out_model", "filename_prefix", prefix)
     for label in ("textured", "clay"):
@@ -117,9 +122,20 @@ def main():
     raw = os.path.join(comfy_output, glbs[0].get("subfolder", ""), glbs[0]["filename"])
     print(f"generated in {time.time() - started:.0f} s: {raw}")
 
-    # 3. the fix pass, 4. the finished asset with its references
+    # 3. the clean-up when asked for, the fix pass, 4. the finished asset with its references
     os.makedirs(args.out, exist_ok=True)
     final = os.path.join(args.out, args.name + ".glb")
+    if args.quads:
+        clean = os.path.join(args.out, args.name + ".clean.glb")
+        run = subprocess.run([args.blender, "--background", "--factory-startup", "--python",
+                              os.path.join(HERE, "blender_retopo.py"), "--", raw, clean, "--quads", str(args.quads),
+                              "--autoremesher", args.autoremesher, "--image-format", "AUTO", "--name", args.name],
+                             capture_output=True, text=True)
+        report = next((line for line in run.stdout.splitlines() if line.startswith("RETOPO ")), None)
+        if run.returncode != 0 or not report or not os.path.isfile(clean):
+            sys.exit("Blender clean-up failed:\n" + (run.stdout + run.stderr)[-3000:])
+        print(report)
+        raw = clean
     run = subprocess.run([args.blender, "--background", "--factory-startup", "--python",
                           os.path.join(HERE, "blender_finish.py"), "--", raw, final, "--length", str(args.length),
                           "--name", args.name, "--pivot", args.pivot], capture_output=True, text=True)
@@ -127,6 +143,8 @@ def main():
     if run.returncode != 0 or not report or not os.path.isfile(final):
         sys.exit("Blender fix pass failed:\n" + (run.stdout + run.stderr)[-3000:])
     print(report)
+    if args.quads:
+        os.remove(clean)
     refs = os.path.join(args.out, args.name + ".refs")
     os.makedirs(refs, exist_ok=True)
     for name, path in views.items():

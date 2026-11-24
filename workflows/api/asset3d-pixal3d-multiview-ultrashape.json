@@ -1147,7 +1147,7 @@
  "390": {
   "class_type": "PrimitiveFloat",
   "inputs": {
-   "value": 20.0
+   "value": 15.0
   },
   "_meta": {
    "title": "in_fov"

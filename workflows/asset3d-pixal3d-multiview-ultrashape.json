@@ -3823,10 +3823,10 @@
    },
    "title": "Texture conditioning (colour views)",
    "widgets_values": [
-    20
+    15
    ],
    "widgets_values_named": {
-    "fov": 20
+    "fov": 15
    }
   },
   {
@@ -3864,10 +3864,10 @@
    },
    "title": "in_fov",
    "widgets_values": [
-    20.0
+    15.0
    ],
    "widgets_values_named": {
-    "value": 20.0
+    "value": 15.0
    }
   },
   {
@@ -4765,7 +4765,7 @@
     0.0,
     0.0,
     0.0,
-    20.0,
+    15.0,
     1.0,
     "perspective"
    ],
@@ -4778,7 +4778,7 @@
     "target_y": 0.0,
     "target_z": 0.0,
     "roll": 0.0,
-    "fov": 20.0,
+    "fov": 15.0,
     "zoom": 1.0,
     "camera_type": "perspective"
    }
@@ -4993,7 +4993,7 @@
     0.0,
     0.0,
     0.0,
-    20.0,
+    15.0,
     1.0,
     "perspective"
    ],
@@ -5006,7 +5006,7 @@
     "target_y": 0.0,
     "target_z": 0.0,
     "roll": 0.0,
-    "fov": 20.0,
+    "fov": 15.0,
     "zoom": 1.0,
     "camera_type": "perspective"
    }
@@ -5965,10 +5965,10 @@
    "outputs": [],
    "properties": {},
    "widgets_values": [
-    "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 20 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
+    "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 15 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
    ],
    "widgets_values_named": {
-    "text": "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 20 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
+    "text": "# asset3d-pixal3d-multiview-ultrashape\n\nFour reference views -> Pixal3D multi-view -> UltraShape -> baked PBR GLB.\n\n## Inputs\n\nLoad one image per side into `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image`.\n\nThe model assumes a fixed camera rig, so the views must be:\n\n- exactly **90 degrees apart**, at **eye level** (no looking down or up),\n- the **same scale and framing** in every view, one subject, nothing cropped off,\n- taken with a **long lens** or rendered near-orthographic (`in_fov` 15 fits turnaround renders and most\n  generated turnaround sheets; raise it for phone photos taken close up),\n- evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.\n\n**left** means the subject's left side as the camera orbits (azimuth 90), **right** is azimuth 270. If the\nsides come out mirrored, swap the two images.\n\nPhotos from arbitrary angles do not fit this model. Turn them into a clean four-view turnaround first (an\nimage-edit model does this well), or use `asset3d-single-ultrashape` with the best single view.\n\nFewer than four views: bypass (Ctrl+B) the unused loader together with its Remove Background, Crop and Save\nnodes. The first connected view is treated as the front.\n\nBackgrounds are removed with BiRefNet and the views are framed at 1024 with a 1.1 margin; the framed views\nare saved as `front_view`, `left_view`, ... so you can check the mattes.\n\n`in_view_framing` keeps the subject at one scale across the views. `match_height` (default) makes it equally\ntall in every view, which also corrects views that were drawn at different sizes. `per_view` is the stock\nbehaviour (each view fills its frame) and is only right when height dominates every view, as on a standing\ncharacter.\n"
    },
    "color": "#222",
    "bgcolor": "#000",

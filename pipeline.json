@@ -3,5 +3,6 @@
   "version": 1,
   "multiview": "workflows/api/asset3d-pixal3d-multiview-ultrashape.json",
   "finish": "tools/blender_finish.py",
+  "cleanup": "tools/blender_retopo.py",
   "setup": "https://github.com/idnn-productions/comfy-ui-model-workflows/blob/main/SETUP.md"
 }

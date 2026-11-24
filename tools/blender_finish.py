@@ -1,7 +1,7 @@
 """The fix pass every generated asset gets before a person sees it. Run with Blender, headless:
 
     blender --background --factory-startup --python tools/blender_finish.py -- in.glb out.glb \
-        --length 40 [--name ship6] [--pivot centre|base] [--texture-format WEBP|JPEG|PNG] [--quality 90]
+        --length 40 [--name ship6] [--pivot centre|base] [--texture-format WEBP|JPEG|AUTO] [--quality 90]
 
 What it does, and why:
 - joins the mesh into one named object with its transforms applied;

@@ -62,7 +62,7 @@ def check_pipeline():
         return [f"pipeline.json: {e}"]
     if pipeline.get("pipeline") != "asset3d" or pipeline.get("version") != 1:
         errors.append("pipeline.json: pipeline must be asset3d, version 1")
-    for key in ("multiview", "finish"):
+    for key in ("multiview", "finish", "cleanup"):
         if not os.path.isfile(os.path.join(REPO, str(pipeline.get(key, "")))):
             errors.append(f"pipeline.json: {key} names a file that is not here ({pipeline.get(key)})")
     try:

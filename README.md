@@ -43,6 +43,32 @@ eight fixed views and prints measurements), before a person is asked to review i
 Measured on the test ship: about four minutes, a 40 m, 60,000-triangle, 4 MB GLB (the raw output is 500,000
 triangles and 36 MB at the default face target).
 
+### Clean-up into quads (optional)
+
+`--quads 12000` adds a step before the fix pass: `tools/blender_retopo.py` remeshes the generated mesh into about
+that many quads with [AutoRemesher](https://github.com/huxingyi/autoremesher) (MIT; its command line, so no Blender
+add-on), unwraps it, and bakes base colour, roughness, metallic, occlusion and a normal map onto it from the
+generated model. Download AutoRemesher's release, and name its program with `--autoremesher` or the `AUTOREMESHER`
+environment variable. On the test ship it added about ten seconds and gave 7,500 quads in a 1.5 MB GLB. The quad
+count is a target the remesher comes near, not a promise, and the unwrap is Blender's Smart UV Project.
+A GLB stores triangles only, so each quad is saved as two; Blender's Tris to Quads gets the quads back for editing.
+
+## Experiments
+
+Tools for comparing settings on your own subject, each of which queues work on a running ComfyUI and refuses to
+start while it is busy:
+
+| tool | what it does |
+|---|---|
+| `tools/experiment.py` | runs one variation of a workflow (`--set <node title>.<input>=<value>`) and reports time, files and mesh size; `--vertex-colours` also saves the full-resolution surface with vertex colours |
+| `tools/moge_fov.py` | asks each installed MoGe model what field of view it sees in an image (seconds, no mesh) |
+| `tools/mesh_proportions.py` | scores a mesh's proportions against the side and front views (reads files only) |
+
+What they showed on the test ship (one subject, so a starting point, not a rule): in the single-view workflow the
+field of view (`fov_x_degrees` of Run MoGe Inference, 0 = recovered from the picture) changes the mesh more than
+anything else, auto is the right start, and the four MoGe models agreed within about four degrees. In the
+multi-view workflow a low `in_fov` (10 to 15) matched drawn orthographic views slightly better than 20.
+
 ## Reference images
 
 Pixal3D multi-view assumes a fixed camera rig. The four views must be 90 degrees apart at eye level, with the
@@ -60,7 +86,7 @@ Inputs are nodes titled `in_*`, the result is `out_model` (GLB in `output/3d/`):
 |---|---|
 | `in_front_image`, `in_left_image`, `in_back_image`, `in_right_image` / `in_image` | reference views. `in_left_image` is the object seen from its own left side, so its front points to the left of the picture; `in_right_image` is the opposite |
 | `in_top_image`, `in_bottom_image` (multi-view) | top and bottom views, drawn nose up; used to paint the texture, not for shape (`in_use_top_bottom_views`) |
-| `in_fov` (multi-view) | field of view of the views; 20 fits turnaround renders |
+| `in_fov` (multi-view) | field of view of the views; 15 fits turnaround renders and drawn orthographic views |
 | `in_view_framing` (multi-view) | how the views are scaled: `match_height` (default, same subject height in every view), `source_scale`, or `per_view` (stock) |
 | `in_use_trellis2` (single) | false = Pixal3D, true = TRELLIS.2 |
 | `in_shape_image_mode` | `original`, `greyscale` or `greyscale_autocontrast` for the shape stages only |
@@ -118,7 +144,9 @@ pipeline as its third step: it sends the approved views to your ComfyUI, waits, 
 
 What the editor reads here is named in [`pipeline.json`](pipeline.json): the workflow in ComfyUI's API format
 (`workflows/api/`, exported from the canvas workflow with
-`python tools/queue_workflow.py <workflow> --dry-run --save-prompt <file>`) and the Blender finish script. The
+`python tools/queue_workflow.py <workflow> --dry-run --save-prompt <file>`), the Blender finish script, and the
+clean-up script the editor runs when **Clean up into quads** is ticked (it needs AutoRemesher, whose location is
+an editor setting). The
 node pack also answers `GET /asset3d/status` on ComfyUI, which says whether UltraShape's code, Python packages
 and checkpoint are in place.
 

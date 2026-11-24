@@ -304,7 +304,7 @@ def add_view_projection(g, views, fov):
                    inputs=[("mode.distance", "FLOAT", "widget"), ("fov", "FLOAT", "widget")],
                    outputs=[("camera_info", "LOAD3D_CAMERA")],
                    widgets={"mode": "orbit", "mode.yaw": 0.0, "mode.pitch": 0.0, "mode.distance": 3.12,
-                            "target_x": 0.0, "target_y": 0.0, "target_z": 0.0, "roll": 0.0, "fov": 20.0,
+                            "target_x": 0.0, "target_y": 0.0, "target_z": 0.0, "roll": 0.0, "fov": 15.0,
                             "zoom": 1.0, "camera_type": "perspective"},
                    title="Rig camera (front)")
     orbit = g.add("CreateCameraOrbit", (x + 270, y + 590), (300, 150),
@@ -363,7 +363,7 @@ def add_view_projection(g, views, fov):
                         inputs=[("mode.distance", "FLOAT", "widget"), ("fov", "FLOAT", "widget")],
                         outputs=[("camera_info", "LOAD3D_CAMERA")],
                         widgets={"mode": "orbit", "mode.yaw": 90.0, "mode.pitch": 0.0, "mode.distance": 3.12,
-                                 "target_x": 0.0, "target_y": 0.0, "target_z": 0.0, "roll": 0.0, "fov": 20.0,
+                                 "target_x": 0.0, "target_y": 0.0, "target_z": 0.0, "roll": 0.0, "fov": 15.0,
                                  "zoom": 1.0, "camera_type": "perspective"},
                         title="Rig camera (left)")
     g.link(distance, "FLOAT", side_camera, "mode.distance")
@@ -508,7 +508,7 @@ The model assumes a fixed camera rig, so the views must be:
 
 - exactly **90 degrees apart**, at **eye level** (no looking down or up),
 - the **same scale and framing** in every view, one subject, nothing cropped off,
-- taken with a **long lens** or rendered near-orthographic (`in_fov` 20 fits turnaround renders and most
+- taken with a **long lens** or rendered near-orthographic (`in_fov` 15 fits turnaround renders and most
   generated turnaround sheets; raise it for phone photos taken close up),
 - evenly lit, without hard cast shadows. Shadows and stray background in the matte become geometry.
 
@@ -594,9 +594,9 @@ def build_multiview(template):
                          + [(v, "IMAGE", "optional") for v in ("front", "left", "back", "right")]
                          + [("fov", "FLOAT", "widget")],
                          outputs=[("positive", "CONDITIONING"), ("negative", "CONDITIONING")],
-                         widgets={"fov": 20}, title="Texture conditioning (colour views)")
+                         widgets={"fov": 15}, title="Texture conditioning (colour views)")
     fov = g.add("PrimitiveFloat", (-1630, 1800), (300, 70), outputs=[("FLOAT", "FLOAT")],
-                widgets={"value": 20.0}, title="in_fov")
+                widgets={"value": 15.0}, title="in_fov")
     g.title(324, "Shape conditioning")
     g.widget_to_input(324, "fov", "FLOAT")
     for name in ("front", "left", "back", "right"):
