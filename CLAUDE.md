@@ -17,7 +17,7 @@ them; `SETUP.md` says what to install. The NFGames Map Editor reads `pipeline.js
 
 ## Handoff, 2026-11-26
 
-Branch `inspect-in-pipeline` (not pushed) goes with the editor's branch `feature/pipeline-guards`:
+This is on `main` (merged and pushed 2026-11-27) and goes with the editor's `main`:
 
 - `tools/blender_inspect.py` now counts loose pieces, open edges and non-manifold edges on the welded mesh, and adds
   `floating_pieces` (pieces with no vertex within 0.1% of the longest side of another piece's surface; `null` above
@@ -27,4 +27,4 @@ Branch `inspect-in-pipeline` (not pushed) goes with the editor's branch `feature
   `blender --background --factory-startup --python-exit-code 1 --python tools/test_inspect.py` prints `INSPECT_TEST ok`.
 
 On the PC: run that test, then follow the steps in the editor's `CLAUDE.md` (the editor's "Workflows folder" setting
-must point at this checkout on this branch).
+must point at this checkout, pulled to `main`).
