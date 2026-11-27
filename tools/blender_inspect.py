@@ -3,8 +3,8 @@
     blender --background --factory-startup --python tools/blender_inspect.py -- model.glb out_dir [--size 900] [--no-render]
 
 Writes out_dir/<view>.png for six orthographic views and two perspective ones (not with --no-render), and
-prints one `INSPECT {json}` line of measurements: faces, bounds, loose pieces, open edges, floating pieces,
-flipped and zero-area faces, left/right symmetry error, textures. Pieces and edges are counted on a welded copy,
+prints one `INSPECT {json}` line of measurements: faces, bounds, loose pieces, open edges,
+floating pieces (no vertex near another piece's surface), flipped and zero-area faces, left/right symmetry error, textures. Pieces and edges are counted on a welded copy,
 so UV seams do not count.
 """
 import json
@@ -15,6 +15,7 @@ import sys
 import bmesh
 import bpy
 from mathutils import Vector
+from mathutils.bvhtree import BVHTree
 from mathutils.kdtree import KDTree
 
 
@@ -70,28 +71,29 @@ def count_flipped(bm, pieces):
 
 
 def count_floating(bm, pieces, radius):
-    """Pieces whose nearest vertex of any other piece is farther than `radius`; None above 500 pieces."""
+    """Pieces none of whose vertices is within `radius` of another piece's surface (its faces, not only its
+    vertices), so a box resting on another box's face is not floating; None above 500 pieces."""
     if len(pieces) > 500:
         return None
     if len(pieces) == 1:
         return 0
-    piece_of_vert = {}
+    piece_of_face = {f.index: i for i, faces in enumerate(pieces) for f in faces}
+    tree = BVHTree.FromBMesh(bm)  # returns the bmesh face index of each triangle
+    touching = set()
     for i, faces in enumerate(pieces):
+        done = False
         for f in faces:
             for v in f.verts:
-                piece_of_vert[v.index] = i
-    tree = KDTree(len(piece_of_vert))
-    for vi in piece_of_vert:
-        tree.insert(bm.verts[vi].co, vi)
-    tree.balance()
-    touching = set()
-    for vi, i in piece_of_vert.items():
-        if i in touching:
-            continue
-        for _, other, _ in tree.find_range(bm.verts[vi].co, radius):
-            if piece_of_vert[other] != i:
-                touching.add(i)
-                touching.add(piece_of_vert[other])
+                for hit in tree.find_nearest_range(v.co, radius):
+                    other = piece_of_face[hit[2]]
+                    if other != i:
+                        touching.add(i)
+                        touching.add(other)
+                        done = True
+                        break
+                if done:
+                    break
+            if done:
                 break
     return len(pieces) - len(touching)
 

@@ -74,6 +74,32 @@ def main():
         cube("a")
         cube("b", location=(10, 0, 0))
         check("two cubes 10 apart", measure_scene(tmp), loose_pieces=2, floating_pieces=2, open_edges=0)
+
+        # a small cube resting on the middle of a big cube's top face: no shared vertex, but it touches
+        fresh()
+        cube("big")
+        small = cube("small", location=(0, 0, 1.25))
+        small.scale = (0.25, 0.25, 0.25)
+        check("cube resting on a cube", measure_scene(tmp), loose_pieces=2, floating_pieces=0)
+
+        # a triangle whose corners lie on a line has no area
+        fresh()
+        mesh = bpy.data.meshes.new("sliver")
+        mesh.from_pydata([(0, 0, 0), (1, 0, 0), (2, 0, 0), (0, 0, 2), (1, 0, 2), (0, 1, 2)], [], [(0, 1, 2), (3, 4, 5)])
+        bpy.context.scene.collection.objects.link(bpy.data.objects.new("sliver", mesh))
+        check("collinear triangle", measure_scene(tmp), zero_area_faces=1)
+
+        # more than 500 pieces: floating is not worked out
+        fresh()
+        mesh = bpy.data.meshes.new("specks")
+        verts, faces = [], []
+        for i in range(501):
+            n = len(verts)
+            verts += [(i, 0, 0), (i + 0.1, 0, 0), (i, 0.1, 0)]
+            faces.append((n, n + 1, n + 2))
+        mesh.from_pydata(verts, [], faces)
+        bpy.context.scene.collection.objects.link(bpy.data.objects.new("specks", mesh))
+        check("501 pieces", measure_scene(tmp), loose_pieces=501, floating_pieces=None)
     print("INSPECT_TEST ok")
 
 
