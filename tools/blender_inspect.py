@@ -1,9 +1,11 @@
 """Look at a GLB: print what it is made of and render it from fixed angles. Run with Blender, headless:
 
-    blender --background --factory-startup --python tools/blender_inspect.py -- model.glb out_dir [--size 900]
+    blender --background --factory-startup --python tools/blender_inspect.py -- model.glb out_dir [--size 900] [--no-render]
 
-Writes out_dir/<view>.png for six orthographic views and two perspective ones, and prints one JSON line of
-measurements (faces, bounds, loose pieces, open edges, left/right symmetry error, textures).
+Writes out_dir/<view>.png for six orthographic views and two perspective ones (not with --no-render), and
+prints one `INSPECT {json}` line of measurements: faces, bounds, loose pieces, open edges,
+floating pieces (no vertex near another piece's surface), flipped and zero-area faces, left/right symmetry error, textures. Pieces and edges are counted on a welded copy,
+so UV seams do not count.
 """
 import json
 import math
@@ -13,6 +15,7 @@ import sys
 import bmesh
 import bpy
 from mathutils import Vector
+from mathutils.bvhtree import BVHTree
 from mathutils.kdtree import KDTree
 
 
@@ -29,38 +32,108 @@ def world_bounds(objects):
     return lo, hi
 
 
+def welded_pieces(bm, radius):
+    """Weld `bm` in place (vertices within `radius` become one) and return its connected pieces as a list of
+    face lists. The importer cuts a mesh along every UV seam; welding puts it back together."""
+    bmesh.ops.remove_doubles(bm, verts=bm.verts[:], dist=radius)
+    bm.verts.ensure_lookup_table()
+    bm.faces.ensure_lookup_table()
+    piece_of = {}
+    pieces = []
+    for start in bm.faces:
+        if start.index in piece_of:
+            continue
+        faces, stack = [], [start]
+        piece_of[start.index] = len(pieces)
+        while stack:
+            f = stack.pop()
+            faces.append(f)
+            for e in f.edges:
+                for g in e.link_faces:
+                    if g.index not in piece_of:
+                        piece_of[g.index] = len(pieces)
+                        stack.append(g)
+        pieces.append(faces)
+    return pieces
+
+
+def count_flipped(bm, pieces):
+    """Per piece, how many faces `recalc_face_normals` turns over; the smaller of turned and unturned, since
+    which side is outward is a guess and the minority is the faces that disagree."""
+    before = [f.normal.copy() for f in bm.faces]
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    bm.faces.ensure_lookup_table()
+    total = 0
+    for faces in pieces:
+        turned = sum(1 for f in faces if f.normal.dot(before[f.index]) < 0)
+        total += min(turned, len(faces) - turned)
+    return total
+
+
+def count_floating(bm, pieces, radius):
+    """Pieces none of whose vertices is within `radius` of another piece's surface (its faces, not only its
+    vertices), so a box resting on another box's face is not floating; None above 500 pieces."""
+    if len(pieces) > 500:
+        return None
+    if len(pieces) == 1:
+        return 0
+    piece_of_face = {f.index: i for i, faces in enumerate(pieces) for f in faces}
+    tree = BVHTree.FromBMesh(bm)  # returns the bmesh face index of each triangle
+    touching = set()
+    for i, faces in enumerate(pieces):
+        done = False
+        for f in faces:
+            for v in f.verts:
+                for hit in tree.find_nearest_range(v.co, radius):
+                    other = piece_of_face[hit[2]]
+                    if other != i:
+                        touching.add(i)
+                        touching.add(other)
+                        done = True
+                        break
+                if done:
+                    break
+            if done:
+                break
+    return len(pieces) - len(touching)
+
+
 def measure(objects):
     """Blender is Z up, and the glTF importer turns the file's Y-up frame into it: file +Y -> Blender +Z,
-    file +Z (the asset's front) -> Blender -Y. Left/right is X in both."""
+    file +Z (the asset's front) -> Blender -Y. Left/right is X in both.
+
+    Pieces, open edges and flipped faces are counted on a welded copy of all the meshes together, in world
+    space: the file's UV seams must not read as gaps. vertices, faces and triangles are the mesh as stored."""
     lo, hi = world_bounds(objects)
+    longest = max(hi - lo)
+    weld_radius = longest * 1e-6
     stats = {"objects": len(objects), "vertices": 0, "faces": 0, "triangles": 0, "loose_pieces": 0,
-             "open_edges": 0, "non_manifold_edges": 0}
+             "open_edges": 0, "non_manifold_edges": 0, "floating_pieces": 0, "flipped_faces": 0,
+             "zero_area_faces": 0}
     points = []
+    whole = bmesh.new()
     for obj in objects:
         bm = bmesh.new()
         bm.from_mesh(obj.data)
         stats["vertices"] += len(bm.verts)
         stats["faces"] += len(bm.faces)
         stats["triangles"] += sum(len(f.verts) - 2 for f in bm.faces)
-        stats["open_edges"] += sum(1 for e in bm.edges if e.is_boundary)
-        stats["non_manifold_edges"] += sum(1 for e in bm.edges if not e.is_manifold and not e.is_boundary)
-        # connected pieces by flood fill
-        seen = set()
-        for v in bm.verts:
-            if v.index in seen:
-                continue
-            stats["loose_pieces"] += 1
-            stack = [v]
-            seen.add(v.index)
-            while stack:
-                for e in stack.pop().link_edges:
-                    for w in e.verts:
-                        if w.index not in seen:
-                            seen.add(w.index)
-                            stack.append(w)
         step = max(1, len(bm.verts) // 60000)
         points += [obj.matrix_world @ v.co for v in list(bm.verts)[::step]]
+        bmesh.ops.transform(bm, matrix=obj.matrix_world, verts=bm.verts[:])
+        stats["zero_area_faces"] += sum(1 for f in bm.faces if f.calc_area() < longest ** 2 * 1e-12)
+        mesh = bpy.data.meshes.new("measure")
+        bm.to_mesh(mesh)
         bm.free()
+        whole.from_mesh(mesh)
+        bpy.data.meshes.remove(mesh)
+    pieces = welded_pieces(whole, weld_radius)
+    stats["loose_pieces"] = len(pieces)
+    stats["open_edges"] = sum(1 for e in whole.edges if e.is_boundary)
+    stats["non_manifold_edges"] = sum(1 for e in whole.edges if not e.is_manifold and not e.is_boundary)
+    stats["floating_pieces"] = count_floating(whole, pieces, longest * 0.001)
+    stats["flipped_faces"] = count_flipped(whole, pieces)
+    whole.free()
     size = hi - lo
     stats.update(bounds_min=[round(c, 4) for c in lo], bounds_max=[round(c, 4) for c in hi],
                  size_width_x=round(size.x, 4), size_length_y=round(size.y, 4), size_height_z=round(size.z, 4))
@@ -129,7 +202,8 @@ def main():
     stats["file"] = os.path.basename(path)
     stats["file_mb"] = round(os.path.getsize(path) / 1e6, 1)
     print("INSPECT " + json.dumps(stats))
-    render_views(objects, out_dir, size)
+    if "--no-render" not in args:
+        render_views(objects, out_dir, size)
 
 
 if __name__ == "__main__":

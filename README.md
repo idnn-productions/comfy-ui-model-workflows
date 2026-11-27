@@ -37,8 +37,8 @@ runs the six-view workflow on the running ComfyUI, then puts the result through 
 writes `<name>.glb` with a `<name>.refs/` folder of the reference images beside it. That is the layout the
 NFGames Map Editor's model viewer shows, references included.
 
-The intent: a generated model goes through the fix pass, and is looked at (`tools/blender_inspect.py` renders
-eight fixed views and prints measurements), before a person is asked to review it.
+The intent: a generated model goes through the fix pass, and is looked at (`tools/blender_inspect.py` prints
+measurements, and renders eight fixed views unless `--no-render`), before a person is asked to review it.
 
 Measured on the test ship: about four minutes, a 40 m, 60,000-triangle, 4 MB GLB (the raw output is 500,000
 triangles and 36 MB at the default face target).
@@ -63,6 +63,7 @@ start while it is busy:
 | `tools/experiment.py` | runs one variation of a workflow (`--set <node title>.<input>=<value>`) and reports time, files and mesh size; `--vertex-colours` also saves the full-resolution surface with vertex colours |
 | `tools/moge_fov.py` | asks each installed MoGe model what field of view it sees in an image (seconds, no mesh) |
 | `tools/mesh_proportions.py` | scores a mesh's proportions against the side and front views (reads files only) |
+| `tools/blender_inspect.py` | measures a GLB in Blender (pieces, open edges, floating pieces, flipped and zero-area faces, symmetry, textures; counted on a welded copy, so UV seams are not gaps) and renders eight views; `--no-render` skips the pictures. `tools/test_inspect.py` checks it |
 
 What they showed on the test ship (one subject, so a starting point, not a rule): in the single-view workflow the
 field of view (`fov_x_degrees` of Run MoGe Inference, 0 = recovered from the picture) changes the mesh more than
@@ -146,7 +147,7 @@ What the editor reads here is named in [`pipeline.json`](pipeline.json): the wor
 (`workflows/api/`, exported from the canvas workflow with
 `python tools/queue_workflow.py <workflow> --dry-run --save-prompt <file>`), the Blender finish script, and the
 clean-up script the editor runs when **Clean up into quads** is ticked (it needs AutoRemesher, whose location is
-an editor setting). The
+an editor setting), and the inspect script the editor runs with `--no-render` to read its measurements. The
 node pack also answers `GET /asset3d/status` on ComfyUI, which says whether UltraShape's code, Python packages
 and checkpoint are in place.
 
