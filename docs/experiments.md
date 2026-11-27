@@ -59,5 +59,6 @@ by a probe grid, then how a map in the NFGames Map Editor would refer to a splat
 - **Rebuilding the workflows.** `tools/build_workflows.py` run against the current ComfyUI templates also changes
   a remesh setting (`sign_mode` from solid to udf). The committed workflows keep the tested value; the new one
   needs a comparison before a rebuild is committed.
-- **A pass that looks at the model.** The Blender steps are fixed scripts. Nothing inspects a result and decides
-  what to repair before a person sees it.
+- **A pass that repairs the model.** `tools/blender_inspect.py` now measures a result (welded piece and open-edge
+  counts, floating pieces, flipped and zero-area faces) and the editor runs it, but nothing yet decides what to
+  repair from those numbers before a person sees it.
